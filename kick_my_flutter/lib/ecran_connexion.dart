@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:kick_my_flutter/ecran_inscription.dart';
 
 class EcranConnexion extends StatefulWidget {
 
@@ -76,9 +77,16 @@ class _EcranConnexionState extends State<EcranConnexion> {
                 padding: const EdgeInsets.all(8.0),
                 child: Expanded(
                   child: MaterialButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranInscription(),
+                        ),
+                      );
+                    },
                     child: Text('Inscription'),
                     color: Colors.blue,
-                    onPressed: () {  },
                   ),
                 ),
               ),

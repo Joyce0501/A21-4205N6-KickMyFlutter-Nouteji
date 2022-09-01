@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:kick_my_flutter/ecran_connexion.dart';
 
 class EcranInscription extends StatefulWidget {
 
@@ -23,8 +24,87 @@ class _EcranInscriptionState extends State<EcranInscription> {
 
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Text("Inscription", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
 
-
+          // const Text(
+          //   'Nom',
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(50),
+            child: TextFormField(
+              decoration: InputDecoration(labelText: "Nom",
+                  labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Colors.grey
+                    ),
+                  )),
+            ),
+          ),
+          // const Text(
+          //   'Mot de passe',
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(50),
+            child: TextFormField(
+              decoration: InputDecoration(labelText: "Mot de passe",
+                  labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Colors.grey
+                    ),
+                  )),
+              obscureText: true,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(50),
+            child: TextFormField(
+              decoration: InputDecoration(labelText: "Confirmaton du mot de passe",
+                  labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: Colors.grey
+                    ),
+                  )),
+              obscureText: true,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Expanded(
+                  child: MaterialButton(
+                    child: Text('Connexion'),
+                    color: Colors.blue,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranConnexion(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Expanded(
+                  child: MaterialButton(
+                    child: Text('Inscription'),
+                    color: Colors.blue,
+                    onPressed: () {  },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
