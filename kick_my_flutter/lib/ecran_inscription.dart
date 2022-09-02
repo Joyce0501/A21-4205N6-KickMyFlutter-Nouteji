@@ -13,6 +13,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // TODO decommenter la ligne suivante
     //  drawer: LeTiroir(),
       appBar: AppBar(

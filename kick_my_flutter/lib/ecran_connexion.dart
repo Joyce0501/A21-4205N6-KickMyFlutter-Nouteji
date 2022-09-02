@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_inscription.dart';
@@ -14,6 +13,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // TODO decommenter la ligne suivante
       //  drawer: LeTiroir(),
       appBar: AppBar(
