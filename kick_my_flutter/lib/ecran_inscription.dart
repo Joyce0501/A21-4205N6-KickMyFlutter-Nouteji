@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_connexion.dart';
+import 'package:dio/dio.dart';
 
 class EcranInscription extends StatefulWidget {
 
