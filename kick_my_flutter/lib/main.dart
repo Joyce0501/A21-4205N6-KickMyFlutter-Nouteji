@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return {
       '/ecranconnexion': (context) => EcranConnexion(),
       '/ecraninscription': (context) => EcranInscription(),
-   //   '/accueil': (context) => EcranAccueil(),
+   //   '/ecranaccueil': (context) => EcranAccueil(),
     };
   }
 }

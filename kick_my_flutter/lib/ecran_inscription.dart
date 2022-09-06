@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_connexion.dart';
 import 'package:dio/dio.dart';
+import 'package:kick_my_flutter/transfer.dart';
+
+import 'lib_http.dart';
 
 class EcranInscription extends StatefulWidget {
 
@@ -10,6 +13,9 @@ class EcranInscription extends StatefulWidget {
 }
 
 class _EcranInscriptionState extends State<EcranInscription> {
+
+  String nomInscription = "";
+  String passwordInscription = "";
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +48,9 @@ class _EcranInscriptionState extends State<EcranInscription> {
                         color: Colors.grey
                     ),
                   )),
+              onChanged: (nom) {
+                nomInscription = nom;
+              }
             ),
           ),
           // const Text(
@@ -58,6 +67,9 @@ class _EcranInscriptionState extends State<EcranInscription> {
                         color: Colors.grey
                     ),
                   )),
+              onChanged: (password) {
+                passwordInscription = password;
+              },
               obscureText: true,
             ),
           ),
@@ -101,7 +113,24 @@ class _EcranInscriptionState extends State<EcranInscription> {
                   child: MaterialButton(
                     child: Text('Inscription'),
                     color: Colors.blue,
-                    onPressed: () {  },
+                    onPressed: () async {
+
+                      try {
+                        SignupRequest req = SignupRequest();
+                        req.username = nomInscription;
+                        req.password = passwordInscription;
+                        var reponse = await signup(req);
+                        print(reponse);
+                      } on DioError catch(e) {
+                        print(e);
+                        String message = e.response!.data;
+                        if (message == "BadCredentialsException") {
+                          print('login deja utilise');
+                        } else {
+                          print('autre erreurs');
+                        }
+                      }
+                    },
                   ),
                 ),
               ),

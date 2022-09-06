@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_inscription.dart';
 import 'package:dio/dio.dart';
+import 'package:kick_my_flutter/transfer.dart';
+
+import 'lib_http.dart';
 
 class EcranConnexion extends StatefulWidget {
 
@@ -10,6 +13,9 @@ class EcranConnexion extends StatefulWidget {
 }
 
 class _EcranConnexionState extends State<EcranConnexion> {
+
+  String nomConnexion = "";
+  String passwordConnexion = "";
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +48,9 @@ class _EcranConnexionState extends State<EcranConnexion> {
                         color: Colors.grey
                     ),
                   )),
+                onChanged: (nom) {
+                  nomConnexion = nom;
+                }
             ),
           ),
           // const Text(
@@ -59,6 +68,9 @@ class _EcranConnexionState extends State<EcranConnexion> {
                 ),
               )),
               obscureText: true,
+                onChanged: (password) {
+                  passwordConnexion = password;
+                }
             ),
           ),
           Row(
@@ -70,7 +82,25 @@ class _EcranConnexionState extends State<EcranConnexion> {
                   child: MaterialButton(
                     child: Text('Connexion'),
                     color: Colors.blue,
-                    onPressed: () {  },
+                    onPressed: () async {
+
+                      try {
+                        SigninRequest req = SigninRequest();
+                        req.username = nomConnexion;
+                        req.password = passwordConnexion;
+                        var reponse = await signin(req);
+                        print(reponse);
+                      } on DioError catch(e) {
+                        print(e);
+                        String message = e.response!.data;
+                        if (message == "BadCredentialsException") {
+                          print('login deja utilise');
+                        } else {
+                          print('autre erreurs');
+                        }
+                      }
+
+                    },
                   ),
                 ),
               ),
