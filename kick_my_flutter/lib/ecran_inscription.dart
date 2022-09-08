@@ -4,6 +4,7 @@ import 'package:kick_my_flutter/ecran_connexion.dart';
 import 'package:dio/dio.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
+import 'ecran_accueil.dart';
 import 'lib_http.dart';
 
 class EcranInscription extends StatefulWidget {
@@ -87,6 +88,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
               obscureText: true,
             ),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -121,6 +123,16 @@ class _EcranInscriptionState extends State<EcranInscription> {
                         req.password = passwordInscription;
                         var reponse = await signup(req);
                         print(reponse);
+
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => EcranAccueil(),
+                        //   ),
+                        // );
+
+
+
                       } on DioError catch(e) {
                         print(e);
                         String message = e.response!.data;
