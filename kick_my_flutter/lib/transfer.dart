@@ -2,6 +2,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+
 part 'transfer.g.dart';
 
 @JsonSerializable()
@@ -40,3 +41,13 @@ class SigninResponse {
   factory SigninResponse.fromJson(Map<String, dynamic> json) => _$SigninResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SigninResponseToJson(this);
 }
+
+// @JsonSerializable()
+// class AddTaskRequest {
+//
+//   String name = '';
+//   DateTime deadline = DateTime.now();
+//
+//   factory AddTaskRequest.fromJson(Map<String, dynamic> json) => _$AddTaskRequestFromJson(json);
+//   Map<String, dynamic> toJson() => _$AddTaskRequestToJson(this);
+// }

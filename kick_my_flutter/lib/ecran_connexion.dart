@@ -4,6 +4,8 @@ import 'package:kick_my_flutter/ecran_inscription.dart';
 import 'package:dio/dio.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
+import 'ecran_accueil.dart';
+import 'ecran_creation.dart';
 import 'lib_http.dart';
 
 class EcranConnexion extends StatefulWidget {
@@ -90,6 +92,15 @@ class _EcranConnexionState extends State<EcranConnexion> {
                         req.password = passwordConnexion;
                         var reponse = await signin(req);
                         print(reponse);
+
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EcranCreation(),
+                          ),
+                        );
+
                       } on DioError catch(e) {
                         print(e);
                         String message = e.response!.data;
@@ -97,9 +108,14 @@ class _EcranConnexionState extends State<EcranConnexion> {
                           print('login deja utilise');
                         } else {
                           print('autre erreurs');
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text('Erreur authentification')
+                              )
+                          );
                         }
                       }
-
                     },
                   ),
                 ),

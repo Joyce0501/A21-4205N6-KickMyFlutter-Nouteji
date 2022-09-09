@@ -32,6 +32,7 @@ dependencies:
   dio: ^4.0.0
   dio_cookie_manager: ^2.0.0
   json_annotation: ^4.0.1
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
