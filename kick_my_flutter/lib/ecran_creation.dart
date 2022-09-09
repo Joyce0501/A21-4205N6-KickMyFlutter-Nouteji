@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kick_my_flutter/ecran_accueil.dart';
+import 'package:kick_my_flutter/lib_http.dart';
+import 'package:kick_my_flutter/transfer.dart';
 
 class EcranCreation extends StatefulWidget {
 
@@ -12,6 +15,9 @@ class EcranCreation extends StatefulWidget {
 class _EcranCreationState extends State<EcranCreation> {
 
   TextEditingController dateinput = TextEditingController();
+  String nomtache = "";
+  DateTime unedate = DateTime.now();
+
 
   @override
   void initState() {
@@ -50,9 +56,9 @@ class _EcranCreationState extends State<EcranCreation> {
                             color: Colors.grey
                         ),
                       )),
-                  // onChanged: (nom) {
-                  //   nomConnexion = nom;
-                  // }
+                  onChanged: (nom) {
+                    nomtache = nom;
+                  }
                 ),
               ),
 
@@ -78,8 +84,11 @@ class _EcranCreationState extends State<EcranCreation> {
                     DateTime? pickedDate = await showDatePicker(
                         context: context, initialDate: DateTime.now(),
                         firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
-                        lastDate: DateTime(2101)
+                        lastDate: DateTime(2101),
                     );
+
+                    unedate = pickedDate!;
+
 
                     if(pickedDate != null ){
                       print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
@@ -94,6 +103,9 @@ class _EcranCreationState extends State<EcranCreation> {
                       print("Date is not selected");
                     }
                   },
+                    // onChanged: (date) {
+                    //   unedate = date as DateTime;
+                    // }
 
                 ),
               ),
@@ -102,20 +114,44 @@ class _EcranCreationState extends State<EcranCreation> {
                 padding: const EdgeInsets.all(8.0),
                 child: Expanded(
                   child: MaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EcranAccueil(),
-                        ),
-                      );
+                    onPressed: () async {
+
+                      try {
+                        AddTaskRequest task = AddTaskRequest();
+                        task.name = nomtache;
+                        task.deadline = unedate;
+                        var reponse = await addtask(task);
+                        print(reponse);
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EcranAccueil(),
+                          ),
+                        );
+
+                      } on DioError catch(e) {
+                        print(e);
+                        String message = e.response!.data;
+                        if (message == "BadCredentialsException") {
+                          print('login deja utilise');
+                        } else {
+                          print('autre erreurs');
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text('Erreur authentification')
+                              )
+                          );
+                        }
+                      }
+
                     },
                     child: Text('Accueil'),
                     color: Colors.blue,
                   ),
                 ),
               ),
-
             ]
       ),
     );

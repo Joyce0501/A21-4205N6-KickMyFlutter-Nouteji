@@ -19,6 +19,51 @@ class _EcranInscriptionState extends State<EcranInscription> {
   String passwordInscription = "";
   String confirmationpassword = "";
 
+  inscription() async {
+
+    if(confirmationpassword.toString().isEmpty && confirmationpassword.toString() != passwordInscription.toString() )
+    {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Les mots de passe ne sont pas identiques')
+          )
+      );
+    }
+
+    else{
+      try {
+        SignupRequest req = SignupRequest();
+        req.username = nomInscription;
+        req.password = passwordInscription;
+        var reponse = await signup(req);
+        print(reponse);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EcranAccueil(),
+          ),
+        );
+
+      } on DioError catch(e) {
+        print(e);
+        String message = e.response!.data;
+        if (message == "BadCredentialsException") {
+          print('login deja utilise');
+        } else {
+          print('autre erreurs');
+
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: Text('Erreur authentification')
+              )
+          );
+        }
+
+      }
+    } // fin de mon else
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +133,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
                   )),
               obscureText: true,
               onChanged: (passwordconfirmation) {
-                passwordconfirmation = confirmationpassword;
+                confirmationpassword = passwordconfirmation;
               },
             ),
           ),
@@ -119,50 +164,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
                   child: MaterialButton(
                     child: Text('Inscription'),
                     color: Colors.blue,
-                    onPressed: () async {
-
-                      // if(confirmationpassword.toString().isEmpty && confirmationpassword.toString() != passwordInscription.toString() )
-                      //   {
-                      //     ScaffoldMessenger.of(context).showSnackBar(
-                      //         SnackBar(
-                      //             content: Text('Les mots de passe ne sont pas identiques')
-                      //         )
-                      //     );
-                      //   }
-
-                      // else{
-                        try {
-                          SignupRequest req = SignupRequest();
-                          req.username = nomInscription;
-                          req.password = passwordInscription;
-                          var reponse = await signup(req);
-                          print(reponse);
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EcranAccueil(),
-                            ),
-                          );
-
-                        } on DioError catch(e) {
-                          print(e);
-                          String message = e.response!.data;
-                          if (message == "BadCredentialsException") {
-                            print('login deja utilise');
-                          } else {
-                            print('autre erreurs');
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Text('Erreur authentification')
-                                )
-                            );
-                          }
-
-                      }
-                      // } // fin de mon else
-                    },
+                    onPressed: inscription,
                   ),
                 ),
               ),

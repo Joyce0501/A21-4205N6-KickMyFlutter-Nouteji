@@ -42,12 +42,46 @@ class SigninResponse {
   Map<String, dynamic> toJson() => _$SigninResponseToJson(this);
 }
 
+@JsonSerializable()
+class AddTaskRequest {
+
+  AddTaskRequest();
+
+  String name = '';
+  DateTime deadline = DateTime.now();
+
+  factory AddTaskRequest.fromJson(Map<String, dynamic> json) => _$AddTaskRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$AddTaskRequestToJson(this);
+}
+
 // @JsonSerializable()
-// class AddTaskRequest {
+// class TasklistRequest {
 //
-//   String name = '';
+//   TasklistRequest();
+//
+//   int id = 0;
+//   String name = "";
+//   int percentageDone = 0;
+//   double percentageTimeSpent = 0;
 //   DateTime deadline = DateTime.now();
 //
-//   factory AddTaskRequest.fromJson(Map<String, dynamic> json) => _$AddTaskRequestFromJson(json);
-//   Map<String, dynamic> toJson() => _$AddTaskRequestToJson(this);
+//
+//   factory TasklistRequest.fromJson(Map<String, dynamic> json) => _$TasklistRequestFromJson(json);
+//   Map<String, dynamic> toJson() => _$TasklistRequestToJson(this);
 // }
+//
+// @JsonSerializable()
+// class HomeItemResponse {
+//
+//   HomeItemResponse();
+//   int id = 0;
+//   String name = "";
+//   int percentageDone = 0;
+//   double percentageTimeSpent = 0;
+//   DateTime deadline = DateTime.now();
+//
+//   factory HomeItemResponse.fromJson(Map<String, dynamic> json) => _$HomeItemResponseFromJson(json);
+//   Map<String, dynamic> toJson() => _$HomeItemResponseToJson(this);
+// }
+
+// flutter pub run build_runner build
