@@ -60,19 +60,6 @@ Future addtask(AddTaskRequest task) async {
   }
 }
 
-// Future <List<HomeItemResponse>> tasklist() async {
-//   try {
-//     var response = await SingletonDio.getDio().get(
-//         'http://10.0.2.2:8080/api/home',
-//     );
-//     print(response);
-//     return  List<HomeItemResponse>.from(response.data);
-//   }
-//   catch (e) {
-//     print(e);
-//     throw(e);
-//   }
-// }
 
 Future<List<HomeItemResponse>> ListTache() async {
   try {
@@ -92,3 +79,17 @@ Future<List<HomeItemResponse>> ListTache() async {
   }
 }
 
+
+Future<TaskDetailResponse>taskdetail() async {
+  try {
+    var response = await SingletonDio.getDio().get(
+        'http://10.0.2.2:8080/api/detail/{id}',
+        data: id.toString(),
+    );
+    print(response);
+  }
+  catch (e) {
+    print(e);
+    throw(e);
+  }
+}

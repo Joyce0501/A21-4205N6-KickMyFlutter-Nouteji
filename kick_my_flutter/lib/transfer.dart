@@ -70,6 +70,19 @@ class HomeItemResponse {
   Map<String, dynamic> toJson() => _$HomeItemResponseToJson(this);
 }
 
+@JsonSerializable()
+class  TaskDetailResponse  {
+
+  TaskDetailResponse();
+  late int id;
+  late String name;
+  late int percentageDone;
+  late double percentageTimeSpent;
+  late DateTime deadline = DateTime.now();
+
+  factory  TaskDetailResponse.fromJson(Map<String, dynamic> json) => _$TaskDetailResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$TaskDetailResponseToJson(this);
+}
 
 final _dateFormatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss");
 DateTime _fromJson(String date) => _dateFormatter.parse(date);

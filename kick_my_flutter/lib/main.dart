@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_connexion.dart';
+import 'package:kick_my_flutter/ecran_consultation.dart';
 import 'package:kick_my_flutter/ecran_inscription.dart';
 
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       '/ecraninscription': (context) => EcranInscription(),
       '/ecranaccueil': (context) => EcranAccueil(),
       '/ecrancreation': (context) => EcranCreation(),
+      '/ecranconsultation': (context) => EcranConsultation(le_parametre: '',),
 
     };
   }

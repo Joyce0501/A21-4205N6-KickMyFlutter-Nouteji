@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kick_my_flutter/ecran_consultation.dart';
 import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
@@ -60,11 +61,22 @@ class _EcranAccueilState extends State<EcranAccueil> {
         prototypeItem: ListTile(
           title: Text("hello"),
         ),
+
         itemBuilder: (context, index) {
           return Row(
             children: [
               Expanded(
                 child: ListTile(
+
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EcranConsultation(le_parametre:this.taches[index].id.toString()),
+                      ),
+                    );
+                  },
+
                   title: Text(this.taches[index].name),
                 ),
               ),
