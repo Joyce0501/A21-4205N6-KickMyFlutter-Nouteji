@@ -1,5 +1,6 @@
 
 
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 
@@ -54,34 +55,25 @@ class AddTaskRequest {
   Map<String, dynamic> toJson() => _$AddTaskRequestToJson(this);
 }
 
-// @JsonSerializable()
-// class TasklistRequest {
-//
-//   TasklistRequest();
-//
-//   int id = 0;
-//   String name = "";
-//   int percentageDone = 0;
-//   double percentageTimeSpent = 0;
-//   DateTime deadline = DateTime.now();
-//
-//
-//   factory TasklistRequest.fromJson(Map<String, dynamic> json) => _$TasklistRequestFromJson(json);
-//   Map<String, dynamic> toJson() => _$TasklistRequestToJson(this);
-// }
-//
-// @JsonSerializable()
-// class HomeItemResponse {
-//
-//   HomeItemResponse();
-//   int id = 0;
-//   String name = "";
-//   int percentageDone = 0;
-//   double percentageTimeSpent = 0;
-//   DateTime deadline = DateTime.now();
-//
-//   factory HomeItemResponse.fromJson(Map<String, dynamic> json) => _$HomeItemResponseFromJson(json);
-//   Map<String, dynamic> toJson() => _$HomeItemResponseToJson(this);
-// }
+
+@JsonSerializable()
+class HomeItemResponse {
+
+  HomeItemResponse();
+  late int id;
+  late String name;
+  late int percentageDone;
+  late double percentageTimeSpent;
+  late DateTime deadline = DateTime.now();
+
+  factory HomeItemResponse.fromJson(Map<String, dynamic> json) => _$HomeItemResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$HomeItemResponseToJson(this);
+}
+
+
+final _dateFormatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss");
+DateTime _fromJson(String date) => _dateFormatter.parse(date);
+String _toJson(DateTime date) => _dateFormatter.format(date);
+
 
 // flutter pub run build_runner build

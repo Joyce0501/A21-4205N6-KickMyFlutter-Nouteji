@@ -17,6 +17,7 @@ class _EcranCreationState extends State<EcranCreation> {
   TextEditingController dateinput = TextEditingController();
   String nomtache = "";
   DateTime unedate = DateTime.now();
+  List<HomeItemResponse> listetache = [];
 
 
   @override
@@ -121,6 +122,7 @@ class _EcranCreationState extends State<EcranCreation> {
                         task.name = nomtache;
                         task.deadline = unedate;
                         var reponse = await addtask(task);
+                    //    listetache.add(reponse);
                         print(reponse);
 
                         Navigator.push(
