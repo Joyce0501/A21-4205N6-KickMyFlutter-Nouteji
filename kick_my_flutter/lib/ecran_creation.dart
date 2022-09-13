@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kick_my_flutter/ecran_accueil.dart';
 import 'package:kick_my_flutter/lib_http.dart';
+import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
 class EcranCreation extends StatefulWidget {
@@ -32,7 +33,7 @@ class _EcranCreationState extends State<EcranCreation> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // TODO decommenter la ligne suivante
-      //  drawer: LeTiroir(),
+        drawer: LeTiroir(),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.

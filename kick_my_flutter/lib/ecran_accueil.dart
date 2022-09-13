@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_consultation.dart';
 import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/transfer.dart';
+import 'package:kick_my_flutter/tiroir_nav.dart';
 
 
 class EcranAccueil extends StatefulWidget {
@@ -41,6 +42,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // TODO decommenter la ligne suivante
+        drawer: LeTiroir(),
      //   drawer: LeTiroir(),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -72,7 +74,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EcranConsultation(le_parametre:this.taches[index].id.toString()),
+                        builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
                       ),
                     );
                   },
@@ -82,16 +84,47 @@ class _EcranAccueilState extends State<EcranAccueil> {
               ),
               Expanded(
                 child: ListTile(
+
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                      ),
+                    );
+                  },
+
                   title: Text(this.taches[index].percentageDone.toString()),
                 ),
               ),
               Expanded(
                 child: ListTile(
+
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                      ),
+                    );
+                  },
+
                   title: Text(this.taches[index].percentageTimeSpent.toString()),
                 ),
               ),
               Expanded(
                 child: ListTile(
+
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                      ),
+                    );
+                  },
+
+
                   title: Text(this.taches[index].deadline.toString()),
                 ),
               ),

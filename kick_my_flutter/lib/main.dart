@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       '/ecraninscription': (context) => EcranInscription(),
       '/ecranaccueil': (context) => EcranAccueil(),
       '/ecrancreation': (context) => EcranCreation(),
-      '/ecranconsultation': (context) => EcranConsultation(le_parametre: '',),
+      '/ecranconsultation': (context) => EcranConsultation(le_parametre: 0,),
 
     };
   }

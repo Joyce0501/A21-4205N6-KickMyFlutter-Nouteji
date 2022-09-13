@@ -80,13 +80,29 @@ Future<List<HomeItemResponse>> ListTache() async {
 }
 
 
-Future<TaskDetailResponse>taskdetail() async {
+Future<TaskDetailResponse>taskdetail(int idtache) async {
   try {
     var response = await SingletonDio.getDio().get(
-        'http://10.0.2.2:8080/api/detail/{id}',
-        data: id.toString(),
+        'http://10.0.2.2:8080/api/detail/'+idtache.toString());
+ //   'http://10.0.2.2:8080/api/detail/?id=''$idtache');
+
+  print(response);
+    return   TaskDetailResponse.fromJson(response.data);
+  }
+  catch (e) {
+    print(e);
+    throw(e);
+  }
+}
+
+Future taskpercentage(int idtache, int percentage) async {
+  try {
+    var response = await SingletonDio.getDio().get(
+        'http://10.0.2.2:8080/api/progress/'+idtache.toString() +percentage.toString()
     );
+
     print(response);
+    return response.data.toString();
   }
   catch (e) {
     print(e);
