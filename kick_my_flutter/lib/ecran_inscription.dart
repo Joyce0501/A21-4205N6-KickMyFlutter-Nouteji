@@ -19,6 +19,8 @@ class _EcranInscriptionState extends State<EcranInscription> {
   String passwordInscription = "";
   String confirmationpassword = "";
 
+
+
   inscription() async {
 
     if(confirmationpassword.toString().isEmpty && confirmationpassword.toString() != passwordInscription.toString() )
@@ -35,7 +37,10 @@ class _EcranInscriptionState extends State<EcranInscription> {
         SignupRequest req = SignupRequest();
         req.username = nomInscription;
         req.password = passwordInscription;
+
         var reponse = await signup(req);
+
+
         print(reponse);
 
         Navigator.push(

@@ -57,7 +57,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
   @override
   void initState() {
     getHttpdetailTache(widget.le_parametre);
-  //  changepercentage(widget.le_parametre,nouveaupourcentage);
+    changepercentage(widget.le_parametre,nouveaupourcentage);
   }
 
   @override
@@ -111,10 +111,10 @@ class _EcranConsultationState extends State<EcranConsultation> {
                     Text("Pourcentage de temps ecoule : " + taskdetailresponse.percentageTimeSpent.toString()),
                   ),
 
-                  Expanded(
-                    flex: 2,
+                  Padding(
+                    padding: const EdgeInsets.all(5),
                     child: TextFormField(
-                        decoration: InputDecoration(labelText: "Entrer le nouuveau pourcentage",
+                        decoration: InputDecoration(labelText: "Entrer le nouveau pourcentage",
                             labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -123,11 +123,27 @@ class _EcranConsultationState extends State<EcranConsultation> {
                               ),
                             )),
                         onChanged: (pourcentage) {
-                          nouveaupourcentage = int.parse('pourcentage');
+                          nouveaupourcentage = int.parse(pourcentage);
                         }
                     ),
                   ),
 
+                  // Expanded(
+                  //   flex: 2,
+                  //   child: TextFormField(
+                  //       decoration: InputDecoration(labelText: "Entrer le nouuveau pourcentage",
+                  //           labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                  //           enabledBorder: OutlineInputBorder(
+                  //             borderRadius: BorderRadius.circular(10),
+                  //             borderSide: BorderSide(
+                  //                 color: Colors.grey
+                  //             ),
+                  //           )),
+                  //       onChanged: (pourcentage) {
+                  //         nouveaupourcentage = int.parse(pourcentage);
+                  //       }
+                  //   ),
+                  // ),
 
                 ]
             ),
@@ -142,7 +158,8 @@ class _EcranConsultationState extends State<EcranConsultation> {
                 child: Text('Modification du pourcentage'),
                 color: Colors.blue,
                 onPressed: () {
-                  changepercentage(widget.le_parametre, int.parse('nouveaupourcentage'));
+                  changepercentage(widget.le_parametre, nouveaupourcentage);
+                  setState(() {});
                 },
               ),
             ),

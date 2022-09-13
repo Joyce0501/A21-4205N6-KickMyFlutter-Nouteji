@@ -123,8 +123,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
                       ),
                     );
                   },
-
-
                   title: Text(this.taches[index].deadline.toString()),
                 ),
               ),

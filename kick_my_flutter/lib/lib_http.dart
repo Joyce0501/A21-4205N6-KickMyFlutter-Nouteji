@@ -84,6 +84,7 @@ Future<TaskDetailResponse>taskdetail(int idtache) async {
   try {
     var response = await SingletonDio.getDio().get(
         'http://10.0.2.2:8080/api/detail/'+idtache.toString());
+
  //   'http://10.0.2.2:8080/api/detail/?id=''$idtache');
 
   print(response);
@@ -98,7 +99,7 @@ Future<TaskDetailResponse>taskdetail(int idtache) async {
 Future taskpercentage(int idtache, int percentage) async {
   try {
     var response = await SingletonDio.getDio().get(
-        'http://10.0.2.2:8080/api/progress/'+idtache.toString() +percentage.toString()
+        'http://10.0.2.2:8080/api/progress/'+idtache.toString() + '/' +percentage.toString()
     );
 
     print(response);

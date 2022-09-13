@@ -80,15 +80,19 @@ class  TaskDetailResponse  {
   late String name;
   late int percentageDone;
   late double percentageTimeSpent;
+
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
   late DateTime deadline = DateTime.now();
 
   factory  TaskDetailResponse.fromJson(Map<String, dynamic> json) => _$TaskDetailResponseFromJson(json);
   Map<String, dynamic> toJson() => _$TaskDetailResponseToJson(this);
 }
 
+
 final _dateFormatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss");
 DateTime _fromJson(String date) => _dateFormatter.parse(date);
 String _toJson(DateTime date) => _dateFormatter.format(date);
+
 
 
 // flutter pub run build_runner build
