@@ -4,6 +4,8 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
+String lenom = "";
+
 
 class SingletonDio {
 
@@ -38,6 +40,7 @@ Future<SigninResponse> signin(SigninRequest req) async {
         data: req
     );
     print(response);
+    lenom = SigninResponse.fromJson(response.data).username;
     return  SigninResponse.fromJson(response.data);
   }
   catch (e) {
