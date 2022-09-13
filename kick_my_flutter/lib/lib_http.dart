@@ -113,3 +113,19 @@ Future taskpercentage(int idtache, int percentage) async {
     throw(e);
   }
 }
+
+Future deconnexion() async {
+  try {
+    var response = await SingletonDio.getDio().post(
+        'http://10.0.2.2:8080/api/id/signout'
+    );
+
+    print(response);
+    return response.data.toString();
+  }
+  catch (e) {
+    print(e);
+    throw(e);
+  }
+}
+

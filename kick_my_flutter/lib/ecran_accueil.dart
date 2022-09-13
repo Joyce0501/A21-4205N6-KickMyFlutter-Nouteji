@@ -62,8 +62,8 @@ class _EcranAccueilState extends State<EcranAccueil> {
     // ],
     //   ),
 
-      body: Container(
-        child: ListView.builder(
+      body:
+        ListView.builder(
           itemCount: taches.length,
           scrollDirection: Axis.vertical,
           prototypeItem: ListTile(
@@ -74,7 +74,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
               children: [
                 Expanded(
                   child: ListTile(
-
                     onTap: () {
                       Navigator.push(
                         context,
@@ -83,13 +82,18 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
-
-                    title: Text(this.taches[index].name),
+                    title: Text( this.taches[index].name,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w500,
+                  //      color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
-
                     onTap: () {
                       Navigator.push(
                         context,
@@ -99,12 +103,18 @@ class _EcranAccueilState extends State<EcranAccueil> {
                       );
                     },
 
-                    title: Text(this.taches[index].percentageDone.toString()),
+                    title: Text(this.taches[index].percentageDone.toString(),
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic,
+                        //    color: Colors.red,
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
-
                     onTap: () {
                       Navigator.push(
                         context,
@@ -113,13 +123,18 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
-
-                    title: Text(this.taches[index].percentageTimeSpent.toString()),
+                    title: Text(this.taches[index].percentageTimeSpent.toString(),
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
                   ),
+
                 ),
                 Expanded(
                   child: ListTile(
-
                     onTap: () {
                       Navigator.push(
                         context,
@@ -128,14 +143,21 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
-                    title: Text(DateFormat.yMMMMd("fr_FR").format(this.taches[index].deadline)),
+                    title: Text(DateFormat.yMd("fr_FR").format(this.taches[index].deadline),
+                      style: TextStyle(
+                        fontSize: 12.0,
+                          fontWeight: FontWeight.w500,
+                          //  color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
                   ),
                 ),
               ],
             );
           },
         ),
-      ),
+
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
