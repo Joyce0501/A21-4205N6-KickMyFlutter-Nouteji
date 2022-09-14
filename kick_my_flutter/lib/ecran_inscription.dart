@@ -19,20 +19,10 @@ class _EcranInscriptionState extends State<EcranInscription> {
   String passwordInscription = "";
   String confirmationpassword = "";
 
-
-
   inscription() async {
 
-    if(confirmationpassword.toString().isEmpty && confirmationpassword.toString() != passwordInscription.toString() )
-    {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Les mots de passe ne sont pas identiques')
-          )
-      );
-    }
 
-    else{
+  //  else{
       try {
         SignupRequest req = SignupRequest();
         req.username = nomInscription;
@@ -66,7 +56,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
         }
 
       }
-    } // fin de mon else
+ //   } // fin de mon else
   }
 
   @override
@@ -169,7 +159,21 @@ class _EcranInscriptionState extends State<EcranInscription> {
                   child: MaterialButton(
                     child: Text('Inscription'),
                     color: Colors.blue,
-                    onPressed: inscription,
+                    onPressed:
+                        // () {S
+                      // if(confirmationpassword.toString().isEmpty && confirmationpassword.toString() != passwordInscription.toString() )
+                      // {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //       SnackBar(
+                      //           content: Text('Les mots de passe ne sont pas identiques')
+                      //       )
+                      //   );
+                      // }
+                      // else {
+                        inscription,
+                      // }
+                 // }
+
                   ),
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_connexion.dart';
 import 'package:kick_my_flutter/ecran_creation.dart';
@@ -14,6 +15,42 @@ class LeTiroir extends StatefulWidget {
 }
 
 class LeTiroirState extends State<LeTiroir> {
+
+  deconnexion() async {
+    try {
+      var reponse = await signout();
+      print(reponse);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EcranConnexion(),
+        ),
+      );
+
+    }
+    on DioError catch(e) {
+      print(e);
+      String message = e.response!.data;
+      if (message == "BadCredentialsException") {
+        print('login deja utilise');
+      } else {
+        print('autre erreurs');
+
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text('Erreur authentification')
+            )
+        );
+      }
+
+    }
+  }
+
+  @override
+  void initState() {
+  //  deconnexion();
+  }
 
 
   @override
@@ -70,16 +107,20 @@ class LeTiroirState extends State<LeTiroir> {
           dense: true,
           leading: Icon(Icons.backup),
           title: Text("deconnexion"),
-          onTap: () {
-            Navigator.of(context).pop();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => EcranConnexion(),
-              ),
-            );
+          onTap:
+            //  () async {
+
+            deconnexion,
+
+            // Navigator.of(context).pop();
+            // Navigator.push(
+            //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => EcranConnexion(),
+          //   ),
+          // );
             // Then close the drawer
-          },
+       //   },
         ),
 
       ],

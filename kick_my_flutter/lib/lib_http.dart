@@ -25,6 +25,7 @@ Future<SigninResponse> signup(SignupRequest req) async {
         data: req
     );
     print(response);
+    lenom = SigninResponse.fromJson(response.data).username;
     return  SigninResponse.fromJson(response.data);
   }
   catch (e) {
@@ -114,13 +115,14 @@ Future taskpercentage(int idtache, int percentage) async {
   }
 }
 
-Future deconnexion() async {
+Future<String>signout() async {
   try {
     var response = await SingletonDio.getDio().post(
         'http://10.0.2.2:8080/api/id/signout'
     );
 
     print(response);
+    lenom = response.data.toString();
     return response.data.toString();
   }
   catch (e) {

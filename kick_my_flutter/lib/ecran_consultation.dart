@@ -51,7 +51,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
           )
       );
     }
-
   }
 
   @override
