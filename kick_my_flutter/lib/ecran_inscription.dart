@@ -21,8 +21,8 @@ class _EcranInscriptionState extends State<EcranInscription> {
 
   inscription() async {
 
-
-  //  else{
+    if(passwordInscription.toString() == confirmationpassword.toString() )
+    {
       try {
         SignupRequest req = SignupRequest();
         req.username = nomInscription;
@@ -56,7 +56,50 @@ class _EcranInscriptionState extends State<EcranInscription> {
         }
 
       }
- //   } // fin de mon else
+    }
+
+
+     else{
+      // try {
+      //   SignupRequest req = SignupRequest();
+      //   req.username = nomInscription;
+      //   req.password = passwordInscription;
+      //
+      //   var reponse = await signup(req);
+      //
+      //
+      //   print(reponse);
+      //
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => EcranAccueil(),
+      //     ),
+      //   );
+      //
+      // } on DioError catch(e) {
+      //   print(e);
+      //   String message = e.response!.data;
+      //   if (message == "BadCredentialsException") {
+      //     print('login deja utilise');
+      //   } else {
+      //     print('autre erreurs');
+      //
+      //     ScaffoldMessenger.of(context).showSnackBar(
+      //         SnackBar(
+      //             content: Text('Erreur authentification')
+      //         )
+      //     );
+      //   }
+      //
+      // }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+             content: Text('Les mots de passe ne sont pas identiques')
+        )
+    );
+   } // fin de mon else
   }
 
   @override
@@ -160,7 +203,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
                     child: Text('Inscription'),
                     color: Colors.blue,
                     onPressed:
-                        // () {S
+                        // () {
                       // if(confirmationpassword.toString().isEmpty && confirmationpassword.toString() != passwordInscription.toString() )
                       // {
                       //   ScaffoldMessenger.of(context).showSnackBar(
@@ -169,10 +212,9 @@ class _EcranInscriptionState extends State<EcranInscription> {
                       //       )
                       //   );
                       // }
-                      // else {
-                        inscription,
-                      // }
-                 // }
+                    inscription,
+
+               //  }
 
                   ),
                 ),
