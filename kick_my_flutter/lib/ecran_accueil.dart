@@ -103,6 +103,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                       );
                     },
 
+                    // leading: Icon(Icons.percent),
                     title: Text(this.taches[index].percentageDone.toString(),
                       style: TextStyle(
                         fontSize: 12.0,
@@ -123,7 +124,8 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
-                    title: Text(this.taches[index].percentageTimeSpent.toString(),
+                  //  leading: Icon(Icons.done_all_sharp),
+                    title: Text( this.taches[index].percentageTimeSpent.toString(),
                       style: TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w500,
@@ -168,7 +170,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
             ),
           );
         },
-      child: const Icon(Icons.create),
+      child: const Icon(Icons.add_task),
     ),
 
     );

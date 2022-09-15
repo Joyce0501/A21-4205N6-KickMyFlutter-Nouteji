@@ -21,12 +21,15 @@ class LeTiroirState extends State<LeTiroir> {
       var reponse = await signout();
       print(reponse);
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EcranConnexion(),
-        ),
-      );
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/ecranconnexion', (Route<dynamic> route) => false);
+
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => EcranConnexion(),
+      //   ),
+      // );
 
     }
     on DioError catch(e) {
@@ -89,7 +92,7 @@ class LeTiroirState extends State<LeTiroir> {
         // ecran sans paramtre.
         ListTile(
           dense: true,
-          leading: Icon(Icons.more_horiz),
+          leading: Icon(Icons.add_task),
           title: Text("Ajout de taches"),
           onTap: () {
             Navigator.of(context).pop();
@@ -105,7 +108,7 @@ class LeTiroirState extends State<LeTiroir> {
 
         ListTile(
           dense: true,
-          leading: Icon(Icons.backup),
+          leading: Icon(Icons.logout),
           title: Text("deconnexion"),
           onTap:
             //  () async {
@@ -121,6 +124,7 @@ class LeTiroirState extends State<LeTiroir> {
           // );
             // Then close the drawer
        //   },
+
         ),
 
       ],

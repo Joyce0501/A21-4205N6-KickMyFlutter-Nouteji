@@ -5,6 +5,8 @@ import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
+import 'ecran_accueil.dart';
+
 
 class EcranConsultation extends StatefulWidget {
 
@@ -38,7 +40,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
   }
 
   void changepercentage(int idtache, int percentage) async{
-
     try{
       var reponse = await taskpercentage(idtache, percentage);
       print(reponse);
@@ -126,24 +127,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
                         }
                     ),
                   ),
-
-                  // Expanded(
-                  //   flex: 2,
-                  //   child: TextFormField(
-                  //       decoration: InputDecoration(labelText: "Entrer le nouuveau pourcentage",
-                  //           labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                  //           enabledBorder: OutlineInputBorder(
-                  //             borderRadius: BorderRadius.circular(10),
-                  //             borderSide: BorderSide(
-                  //                 color: Colors.grey
-                  //             ),
-                  //           )),
-                  //       onChanged: (pourcentage) {
-                  //         nouveaupourcentage = int.parse(pourcentage);
-                  //       }
-                  //   ),
-                  // ),
-
                 ]
             ),
        ),
@@ -159,6 +142,8 @@ class _EcranConsultationState extends State<EcranConsultation> {
                 onPressed: () {
                   changepercentage(widget.le_parametre, nouveaupourcentage);
                   setState(() {});
+
+
                 },
               ),
             ),

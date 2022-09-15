@@ -36,7 +36,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EcranAccueil(),
+            builder: (context) => EcranConnexion(),
           ),
         );
 
@@ -179,23 +179,23 @@ class _EcranInscriptionState extends State<EcranInscription> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: MaterialButton(
-                    child: Text('Connexion'),
-                    color: Colors.blue,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EcranConnexion(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Expanded(
+              //     child: MaterialButton(
+              //       child: Text('Connexion'),
+              //       color: Colors.blue,
+              //       onPressed: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => EcranConnexion(),
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Expanded(
