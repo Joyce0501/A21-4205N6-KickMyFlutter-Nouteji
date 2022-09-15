@@ -40,18 +40,35 @@ class _EcranConsultationState extends State<EcranConsultation> {
   }
 
   void changepercentage(int idtache, int percentage) async{
-    try{
-      var reponse = await taskpercentage(idtache, percentage);
-      print(reponse);
-      setState(() {});
-    } catch (e) {
-      print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Erreur reseau')
-          )
-      );
+
+    if(nouveaupourcentage == 0)
+      {
+        nouveaupourcentage == taskdetailresponse.percentageDone;
+      }
+
+    else{
+      try{
+        var reponse = await taskpercentage(idtache, percentage);
+        print(reponse);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EcranAccueil(),
+          ),
+        );
+        setState(() {});
+
+      } catch (e) {
+        print(e);
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text('Erreur reseau')
+            )
+        );
+      }
     }
+
   }
 
   @override
@@ -141,9 +158,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
                 color: Colors.blue,
                 onPressed: () {
                   changepercentage(widget.le_parametre, nouveaupourcentage);
-                  setState(() {});
-
-
+              //    setState(() {});
                 },
               ),
             ),
