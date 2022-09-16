@@ -1,9 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:kick_my_flutter/transfer.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'ecran_accueil.dart';
 
@@ -71,6 +73,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
   void initState() {
     getHttpdetailTache(widget.le_parametre);
     changepercentage(widget.le_parametre,nouveaupourcentage);
+    initializeDateFormatting("fr-FR", null);
   }
 
   @override
@@ -109,7 +112,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
                   Expanded(
                     flex: 2,
                     child:
-                    Text("date d'echeance de la tache : " + taskdetailresponse.deadline.toString()),
+                    Text("date d'echeance de la tache : " + DateFormat.yMd("fr_FR").format(taskdetailresponse.deadline)),
                   ),
 
                   Expanded(
