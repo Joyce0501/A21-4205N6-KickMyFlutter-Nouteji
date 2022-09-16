@@ -97,7 +97,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     },
 
                     // leading: Icon(Icons.percent),
-                    title: Text(this.taches[index].percentageDone.toString(),
+                    title: Text(this.taches[index].percentageDone.toString() + "%",
                       style: TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w500,
