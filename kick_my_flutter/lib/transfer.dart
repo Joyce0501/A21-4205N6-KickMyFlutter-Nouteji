@@ -76,10 +76,10 @@ class HomeItemResponse {
 class  TaskDetailResponse  {
 
   TaskDetailResponse();
-  late int id;
-  late String name;
-  late int percentageDone;
-  late double percentageTimeSpent;
+   int id = 0;
+   String name = "";
+   int percentageDone = 0;
+   double percentageTimeSpent = 0;
 
   @JsonKey(fromJson: _fromJson, toJson: _toJson)
   late DateTime deadline = DateTime.now();

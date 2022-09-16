@@ -25,7 +25,7 @@ Future<SigninResponse> signup(SignupRequest req) async {
         data: req
     );
     print(response);
-  //  lenom = SigninResponse.fromJson(response.data).username;
+    lenom = SigninResponse.fromJson(response.data).username;
     return  SigninResponse.fromJson(response.data);
   }
   catch (e) {
@@ -122,7 +122,6 @@ Future<String>signout() async {
     );
 
     print(response);
-  //  lenom = response.data.toString();
     return response.data.toString();
   }
   catch (e) {

@@ -54,13 +54,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
         // the App.build method, and use it to set our appbar title.
         title: Text('Accueil'),
       ),
-    //   body: Column(
-    //   mainAxisAlignment: MainAxisAlignment.center,
-    // children: <Widget>[
-    //
-    //
-    // ],
-    //   ),
 
       body:
         ListView.builder(

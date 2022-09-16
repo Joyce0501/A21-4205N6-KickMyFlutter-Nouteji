@@ -23,14 +23,6 @@ class LeTiroirState extends State<LeTiroir> {
 
       Navigator.of(context)
           .pushNamedAndRemoveUntil('/ecranconnexion', (Route<dynamic> route) => false);
-
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => EcranConnexion(),
-      //   ),
-      // );
-
     }
     on DioError catch(e) {
       print(e);

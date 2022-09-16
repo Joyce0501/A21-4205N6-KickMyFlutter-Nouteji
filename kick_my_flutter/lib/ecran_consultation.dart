@@ -19,9 +19,11 @@ class EcranConsultation extends StatefulWidget {
   _EcranConsultationState createState() => _EcranConsultationState();
 }
 
+const int POURCENT_NON_MODIFIE = -1;
+
 class _EcranConsultationState extends State<EcranConsultation> {
 
-  int nouveaupourcentage = 0;
+   int nouveaupourcentage = POURCENT_NON_MODIFIE;
 
   TaskDetailResponse taskdetailresponse = TaskDetailResponse();
 
@@ -41,7 +43,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
 
   void changepercentage(int idtache, int percentage) async{
 
-    if(nouveaupourcentage == 0)
+    if(nouveaupourcentage == POURCENT_NON_MODIFIE)
       {
         nouveaupourcentage == taskdetailresponse.percentageDone;
       }
@@ -49,14 +51,8 @@ class _EcranConsultationState extends State<EcranConsultation> {
     else{
       try{
         var reponse = await taskpercentage(idtache, percentage);
+        taskdetailresponse.percentageDone = nouveaupourcentage;
         print(reponse);
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EcranAccueil(),
-          ),
-        );
         setState(() {});
 
       } catch (e) {
@@ -120,6 +116,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
                     flex: 2,
                     child:
                     Text("Pourcentage d" + "'" "avancement : " + taskdetailresponse.percentageDone.toString()),
+
                   ),
 
                   Expanded(
@@ -140,7 +137,11 @@ class _EcranConsultationState extends State<EcranConsultation> {
                               ),
                             )),
                         onChanged: (pourcentage) {
-                          nouveaupourcentage = int.parse(pourcentage);
+                          try {
+                            nouveaupourcentage = int.parse(pourcentage);
+                          } catch(e) {
+                            nouveaupourcentage = POURCENT_NON_MODIFIE;
+                          }
                         }
                     ),
                   ),
@@ -150,20 +151,20 @@ class _EcranConsultationState extends State<EcranConsultation> {
     ),
 
 
-      Row(
-          children: [
-            Expanded(
-              child: MaterialButton(
-                child: Text('Modification du pourcentage'),
-                color: Colors.blue,
-                onPressed: () {
-                  changepercentage(widget.le_parametre, nouveaupourcentage);
-              //    setState(() {});
-                },
+          Row(
+            children: [
+              Expanded(
+                child: MaterialButton(
+                  child: Text('Enregistrement du nouveau pourcentage'),
+                  color: Colors.blue,
+                  onPressed: () {
+                    changepercentage(widget.le_parametre, nouveaupourcentage);
+                    //    setState(() {});
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
