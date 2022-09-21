@@ -77,7 +77,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Inscription'),
+        title: Text(Locs.of(context).trans('Inscription')),
       ),
       body: Column(
 
@@ -88,7 +88,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
           Padding(
             padding: const EdgeInsets.all(50),
             child: TextFormField(
-              decoration: InputDecoration(labelText: "Nom",
+              decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
                   labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -105,7 +105,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
           Padding(
             padding: const EdgeInsets.all(50),
             child: TextFormField(
-              decoration: InputDecoration(labelText: "Mot de passe",
+              decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
                   labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -122,7 +122,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
           Padding(
             padding: const EdgeInsets.all(50),
             child: TextFormField(
-              decoration: InputDecoration(labelText: 'Confirmaton du mot de passe',
+              decoration: InputDecoration(labelText: Locs.of(context).trans('Confirmaton du mot de passe'),
                   labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -145,7 +145,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
                 padding: const EdgeInsets.all(8.0),
                 child: Expanded(
                   child: MaterialButton(
-                    child: Text('Inscription'),
+                    child: Text(Locs.of(context).trans('Inscription')),
                     color: Colors.blue,
                     onPressed:
                     inscription,

@@ -3,5 +3,7 @@
   "Inscription" : "Inscription",
   "Nom" : "Username",
   "Mot de passe" : "Password",
-  "Confirmaton du mot de passe" : "Password confirmation"
+  "Confirmaton du mot de passe" : "Password confirmation",
+
+  "Creation de tache" : "Create a task"
 }

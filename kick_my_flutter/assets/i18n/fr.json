@@ -1,7 +1,11 @@
 {
-  "Connexion" : "Connecxon",
+  "Connexion" : "Connexion",
   "Inscription" : "Inscription",
   "Nom" : "Nom",
   "Mot de passe" : "Mot de passe",
-  "Confirmaton du mot de passe" : "Confirmation du mot de passe"
+  "Confirmaton du mot de passe" : "Confirmation du mot de passe",
+
+  "Creation de tache" : "Creation de tache",
+  "Creation de tache" : "Creation de tache",
+  "Creation de tache" : "Creation de tache"
 }
