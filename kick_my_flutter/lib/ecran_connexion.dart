@@ -6,6 +6,7 @@ import 'package:kick_my_flutter/transfer.dart';
 
 import 'ecran_accueil.dart';
 import 'ecran_creation.dart';
+import 'i18n/intl_localization.dart';
 import 'lib_http.dart';
 
 class EcranConnexion extends StatefulWidget {
@@ -28,13 +29,13 @@ class _EcranConnexionState extends State<EcranConnexion> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Connexion'),
+        title: Text(Locs.of(context).trans('Connexion')),
       ),
       body: Column(
 
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text("Connexion", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+          Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
 
           // const Text(
           //   'Nom',
@@ -42,7 +43,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
           Padding(
             padding: const EdgeInsets.all(50),
             child: TextFormField(
-              decoration: InputDecoration(labelText: "Nom",
+              decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
                   labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -61,7 +62,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
           Padding(
             padding: const EdgeInsets.all(50),
             child: TextFormField(
-              decoration: InputDecoration(labelText: "Mot de passe",
+              decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
               labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -82,7 +83,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
                 padding: const EdgeInsets.all(8.0),
                 child: Expanded(
                   child: MaterialButton(
-                    child: Text('Connexion'),
+                    child: Text(Locs.of(context).trans('Connexion')),
                     color: Colors.blue,
                     onPressed: () async {
 
@@ -132,7 +133,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
                         ),
                       );
                     },
-                    child: Text('Inscription'),
+                    child: Text(Locs.of(context).trans('Inscription')),
                     color: Colors.blue,
                   ),
                 ),

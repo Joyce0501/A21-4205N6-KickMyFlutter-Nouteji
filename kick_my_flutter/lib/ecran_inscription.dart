@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
 import 'ecran_accueil.dart';
+import 'i18n/intl_localization.dart';
 import 'lib_http.dart';
 
 class EcranInscription extends StatefulWidget {
@@ -121,7 +122,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
           Padding(
             padding: const EdgeInsets.all(50),
             child: TextFormField(
-              decoration: InputDecoration(labelText: "Confirmaton du mot de passe",
+              decoration: InputDecoration(labelText: 'Confirmaton du mot de passe',
                   labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),

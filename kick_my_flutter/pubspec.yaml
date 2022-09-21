@@ -33,6 +33,8 @@ dependencies:
   dio_cookie_manager: ^2.0.0
   json_annotation: ^4.0.1
   intl: ^0.17.0
+  flutter_localizations: # TODO ajouter ces 2 lignes
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,6 +66,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/i18n/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
