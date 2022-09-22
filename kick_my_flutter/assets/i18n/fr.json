@@ -5,7 +5,23 @@
   "Mot de passe" : "Mot de passe",
   "Confirmaton du mot de passe" : "Confirmation du mot de passe",
 
-  "Creation de tache" : "Creation de tache",
-  "Creation de tache" : "Creation de tache",
-  "Creation de tache" : "Creation de tache"
+  "Creation de tache" : "Création de tache",
+  "Entrer une date" : "Entrer une date",
+  "Nom de la tache" : "Nom de la tache",
+  "Creation" : "Création",
+
+  "Consultation" : "Consultation",
+  "Nom de la tache" : "Nom de la tache",
+  "Date decheance de la tache" : "Date d'écheance de la tache",
+  "Pourcentage davancement" : "Pourcentage d'avancement",
+  "Pourcentage de temps ecoule" : "Pourcentage de temps écoulé",
+  "Entrer le nouveau pourcentage" : "Entrer le nouveau pourcentage",
+  "Enregistrement du nouveau pourcentage" : "Enregistrement du nouveau pourcentage",
+
+  "Accueil" : "Accueil",
+
+  "Ajout de taches" : "Ajout de taches",
+
+  "Deconnexion" : "Deconnexion"
+
 }

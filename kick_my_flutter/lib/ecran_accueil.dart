@@ -9,6 +9,8 @@ import 'package:kick_my_flutter/transfer.dart';
 import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'i18n/intl_localization.dart';
+
 
 class EcranAccueil extends StatefulWidget {
 
@@ -52,7 +54,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Accueil'),
+        title: Text(Locs.of(context).trans('Accueil')),
       ),
 
       body:

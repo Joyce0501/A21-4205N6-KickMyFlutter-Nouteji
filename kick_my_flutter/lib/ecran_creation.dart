@@ -7,6 +7,8 @@ import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
+import 'i18n/intl_localization.dart';
+
 class EcranCreation extends StatefulWidget {
 
   @override
@@ -37,12 +39,12 @@ class _EcranCreationState extends State<EcranCreation> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Création'),
+        title: Text(Locs.of(context).trans('Creation')),
       ),
       body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Creation de tache", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+              Text(Locs.of(context).trans('Creation de tache'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
 
               // const Text(
               //   'Nom',
@@ -50,7 +52,7 @@ class _EcranCreationState extends State<EcranCreation> {
               Padding(
                 padding: const EdgeInsets.all(50),
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: "Nom de la tache",
+                  decoration: InputDecoration(labelText: Locs.of(context).trans('Nom de la tache'),
                       labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -71,7 +73,7 @@ class _EcranCreationState extends State<EcranCreation> {
                   controller: dateinput, //editing controller of this TextField
                   decoration: InputDecoration(
                       //icon: Icon(Icons.calendar_today), //icon of text field
-                      labelText: "Entrer une date" ,//label text of field
+                      labelText: Locs.of(context).trans('Entrer une date') ,//label text of field
                       labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -146,7 +148,7 @@ class _EcranCreationState extends State<EcranCreation> {
                       }
 
                     },
-                    child: Text('Accueil'),
+                    child: Text(Locs.of(context).trans('Accueil')),
                     color: Colors.blue,
                   ),
                 ),

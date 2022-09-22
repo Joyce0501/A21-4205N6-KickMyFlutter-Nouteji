@@ -6,6 +6,7 @@ import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/transfer.dart';
 
 import 'ecran_accueil.dart';
+import 'i18n/intl_localization.dart';
 
 
 class LeTiroir extends StatefulWidget {
@@ -66,7 +67,7 @@ class LeTiroirState extends State<LeTiroir> {
         ListTile(
           dense: true,
           leading: Icon(Icons.home),
-          title: Text("Accueil"),
+          title: Text(Locs.of(context).trans('Accueil')),
           onTap: () {
             // TODO ferme le tiroir de navigation
             Navigator.of(context).pop();
@@ -85,7 +86,7 @@ class LeTiroirState extends State<LeTiroir> {
         ListTile(
           dense: true,
           leading: Icon(Icons.add_task),
-          title: Text("Ajout de taches"),
+          title: Text(Locs.of(context).trans('Ajout de taches')),
           onTap: () {
             Navigator.of(context).pop();
             Navigator.push(
@@ -101,7 +102,7 @@ class LeTiroirState extends State<LeTiroir> {
         ListTile(
           dense: true,
           leading: Icon(Icons.logout),
-          title: Text("deconnexion"),
+          title: Text(Locs.of(context).trans('Deconnexion')),
           onTap:
             //  () async {
 

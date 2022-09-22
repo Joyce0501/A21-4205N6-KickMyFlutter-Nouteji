@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_inscription.dart';
 import 'package:dio/dio.dart';
 import 'package:kick_my_flutter/transfer.dart';
+// import 'package:progress_dialog/progress_dialog.dart';
 
 import 'ecran_accueil.dart';
-import 'ecran_creation.dart';
+
 import 'i18n/intl_localization.dart';
 import 'lib_http.dart';
 
@@ -19,6 +20,38 @@ class _EcranConnexionState extends State<EcranConnexion> {
 
   String nomConnexion = "";
   String passwordConnexion = "";
+//  late ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal, isDismissible: true, showLogs: true);
+
+  connexion() async {
+    try {
+      SigninRequest req = SigninRequest();
+      req.username = nomConnexion;
+      req.password = passwordConnexion;
+      var reponse = await signin(req);
+      print(reponse);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EcranAccueil(),
+        ),
+      );
+
+    } on DioError catch(e) {
+      print(e);
+      String message = e.response!.data;
+      if (message == "BadCredentialsException") {
+        print('login deja utilise');
+      } else {
+        print('autre erreurs');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text('Erreur authentification')
+            )
+        );
+      }
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +66,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
       ),
       body: Column(
 
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
 
@@ -85,39 +118,8 @@ class _EcranConnexionState extends State<EcranConnexion> {
                   child: MaterialButton(
                     child: Text(Locs.of(context).trans('Connexion')),
                     color: Colors.blue,
-                    onPressed: () async {
-
-                      try {
-                        SigninRequest req = SigninRequest();
-                        req.username = nomConnexion;
-                        req.password = passwordConnexion;
-                        var reponse = await signin(req);
-                        print(reponse);
-
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EcranAccueil(),
-                          ),
-                        );
-
-                      } on DioError catch(e) {
-                        print(e);
-                        String message = e.response!.data;
-                        if (message == "BadCredentialsException") {
-                          print('login deja utilise');
-                        } else {
-                          print('autre erreurs');
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text('Erreur authentification')
-                              )
-                          );
-                        }
-                      }
-                    },
+                    onPressed:
+                      connexion,
                   ),
                 ),
               ),

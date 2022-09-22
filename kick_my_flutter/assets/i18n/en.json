@@ -5,5 +5,23 @@
   "Mot de passe" : "Password",
   "Confirmaton du mot de passe" : "Password confirmation",
 
-  "Creation de tache" : "Create a task"
+  "Creation de tache" : "Create a task",
+  "Entrer une date" : "Enter a date",
+  "Nom de la tache" : "Task's name",
+  "Creation" : "Creation",
+
+
+  "Consultation" : "Consultation",
+  "Nom de la tache" : "Task's name",
+  "Date decheance de la tache" : "Task's deadline",
+  "Pourcentage davancement" : "Percentage of completion",
+  "Pourcentage de temps ecoule" : "Percentage of time elapsed",
+  "Entrer le nouveau pourcentage" : "Enter a new percentage",
+  "Enregistrement du nouveau pourcentage" : "Saving the new percentage",
+
+  "Accueil" : "Welcome",
+
+  "Ajout de taches" : "Add tasks",
+
+  "Deconnexion" : "Deconnection"
 }

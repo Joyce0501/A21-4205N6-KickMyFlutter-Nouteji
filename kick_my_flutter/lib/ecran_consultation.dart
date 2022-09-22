@@ -7,7 +7,7 @@ import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:kick_my_flutter/transfer.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'ecran_accueil.dart';
+import 'i18n/intl_localization.dart';
 
 
 class EcranConsultation extends StatefulWidget {
@@ -85,7 +85,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text('Consultation'),
+          title: Text(Locs.of(context).trans('Consultation')),
         ),
 
       body: Column(
@@ -106,32 +106,32 @@ class _EcranConsultationState extends State<EcranConsultation> {
                   Expanded(
                     flex: 2,
                     child:
-                    Text("nom de la tache : " + taskdetailresponse.name),
+                    Text(Locs.of(context).trans('Nom de la tache') + " : " + taskdetailresponse.name),
                   ),
 
                   Expanded(
                     flex: 2,
                     child:
-                    Text("date d'echeance de la tache : " + DateFormat.yMd("fr_FR").format(taskdetailresponse.deadline)),
+                    Text(Locs.of(context).trans('Date decheance de la tache') + " : " + DateFormat.yMd("fr_FR").format(taskdetailresponse.deadline)),
                   ),
 
                   Expanded(
                     flex: 2,
                     child:
-                    Text("Pourcentage d" + "'" "avancement : " + taskdetailresponse.percentageDone.toString()),
+                    Text(Locs.of(context).trans('Pourcentage davancement') + " : " + taskdetailresponse.percentageDone.toString()),
 
                   ),
 
                   Expanded(
                     flex: 2,
                     child:
-                    Text("Pourcentage de temps ecoule : " + taskdetailresponse.percentageTimeSpent.toString()),
+                    Text(Locs.of(context).trans('Pourcentage de temps ecoule') + " : " + taskdetailresponse.percentageTimeSpent.toString()),
                   ),
 
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: TextFormField(
-                        decoration: InputDecoration(labelText: "Entrer le nouveau pourcentage",
+                        decoration: InputDecoration(labelText: Locs.of(context).trans('Entrer le nouveau pourcentage'),
                             labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -158,7 +158,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
             children: [
               Expanded(
                 child: MaterialButton(
-                  child: Text('Enregistrement du nouveau pourcentage'),
+                  child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
                   color: Colors.blue,
                   onPressed: () {
                     changepercentage(widget.le_parametre, nouveaupourcentage);
