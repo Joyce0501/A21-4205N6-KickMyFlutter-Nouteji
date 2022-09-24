@@ -45,7 +45,68 @@ class _EcranInscriptionState extends State<EcranInscription> {
         String message = e.response!.data;
         if (message == "BadCredentialsException") {
           print('login deja utilise');
-        } else {
+        }
+        else if(message == "UsernameTooShort")
+        {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content: const Text('Nom utilisateur trop court'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+        else if(message == "UsernameAlreadyTaken")
+        {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content: const Text('Nom utilisateur deja pris'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+        else if(message == "PasswordTooShort")
+        {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content: const Text('Mot de passe trop court'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+        else {
           print('autre erreurs');
 
           ScaffoldMessenger.of(context).showSnackBar(
@@ -57,14 +118,25 @@ class _EcranInscriptionState extends State<EcranInscription> {
 
       }
     }
-
-
      else{
-        ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-             content: Text('Les mots de passe ne sont pas identiques')
-        )
-    );
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //      SnackBar(
+    //          content: Text('Les mots de passe ne sont pas identiques')
+    //     )
+    // );
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content: const Text('Les mots de passe ne sont pas identiques'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
    } // fin de mon else
   }
 

@@ -41,7 +41,28 @@ class _EcranConnexionState extends State<EcranConnexion> {
       String message = e.response!.data;
       if (message == "BadCredentialsException") {
         print('login deja utilise');
-      } else {
+      }
+      else if(message == "InternalAuthenticationServiceException")
+      {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content: const Text('Compte introuvable'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+      else {
         print('autre erreurs');
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -49,6 +70,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
             )
         );
       }
+
     }
   }
 

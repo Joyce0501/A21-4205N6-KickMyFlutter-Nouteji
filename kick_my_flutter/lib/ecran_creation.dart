@@ -22,6 +22,104 @@ class _EcranCreationState extends State<EcranCreation> {
   DateTime unedate = DateTime.now();
   List<HomeItemResponse> listetache = [];
 
+  creationtaches() async{
+
+    try {
+      AddTaskRequest task = AddTaskRequest();
+      task.name = nomtache;
+      task.deadline = unedate;
+      var reponse = await addtask(task);
+      //    listetache.add(reponse);
+      print(reponse);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EcranAccueil(),
+        ),
+      );
+
+    } on DioError catch(e) {
+      print(e);
+      String message = e.response!.data;
+      if (message == "BadCredentialsException") {
+        print('login deja utilise');
+      }
+
+      else if(message == "Existing")
+      {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content: const Text('Le nom de tache entre existe deja'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+
+      else if(message == "TooShort")
+      {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content: const Text('Le nom de tache entre est trop court'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+
+      else if(message == "Empty")
+      {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content: const Text('Nom de tache non entre'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+      else {
+        print('autre erreurs');
+
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text('Erreur ')
+            )
+        );
+      }
+    }
+  }
+
 
   @override
   void initState() {
@@ -114,40 +212,8 @@ class _EcranCreationState extends State<EcranCreation> {
                 padding: const EdgeInsets.all(8.0),
                 child: Expanded(
                   child: MaterialButton(
-                    onPressed: () async {
-
-                      try {
-                        AddTaskRequest task = AddTaskRequest();
-                        task.name = nomtache;
-                        task.deadline = unedate;
-                        var reponse = await addtask(task);
-                    //    listetache.add(reponse);
-                        print(reponse);
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EcranAccueil(),
-                          ),
-                        );
-
-                      } on DioError catch(e) {
-                        print(e);
-                        String message = e.response!.data;
-                        if (message == "BadCredentialsException") {
-                          print('login deja utilise');
-                        } else {
-                          print('autre erreurs');
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text('Erreur ')
-                              )
-                          );
-                        }
-                      }
-
-                    },
+                    onPressed:
+                    creationtaches,
                     child: Text(Locs.of(context).trans('Accueil')),
                     color: Colors.blue,
                   ),
