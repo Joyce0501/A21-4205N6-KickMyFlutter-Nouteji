@@ -23,7 +23,7 @@ dependencies:
   dio_cookie_manager: ^2.0.0
   json_annotation: ^4.0.1
   intl: ^0.17.0
- # progress_dialog: ^1.2.4 #
+#  progress_dialog: ^1.2.4
   flutter_localizations: # TODO ajouter ces 2 lignes
     sdk: flutter
 
