@@ -20,6 +20,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
 
   String nomConnexion = "";
   String passwordConnexion = "";
+  bool dialogVisible = false;
 
   // final ProgressDialog pr = ProgressDialog(context);
   // pr = ProgressDialog(context,type: ProgressDialogType.Normal, isDismissible: true/false, showLogs: true/false);
@@ -29,7 +30,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Loading..." )),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Connexion en cours..." )),
         ],),
     );
     showDialog(barrierDismissible: false,
@@ -42,7 +43,9 @@ class _EcranConnexionState extends State<EcranConnexion> {
 
   connexion() async {
     try {
-      showLoaderDialog(context);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showLoaderDialog(context);
+      });
       SigninRequest req = SigninRequest();
       req.username = nomConnexion;
       req.password = passwordConnexion;
@@ -59,6 +62,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
     } on DioError catch(e) {
       print(e);
       String message = e.response!.data;
+      Navigator.of(context).pop();
       if (message == "BadCredentialsException") {
         print('login deja utilise');
       }

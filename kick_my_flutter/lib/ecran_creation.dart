@@ -22,15 +22,33 @@ class _EcranCreationState extends State<EcranCreation> {
   DateTime unedate = DateTime.now();
   List<HomeItemResponse> listetache = [];
 
-  creationtaches() async{
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Création de la tache en cours..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
 
+  creationtaches() async{
     try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showLoaderDialog(context);
+      });
       AddTaskRequest task = AddTaskRequest();
       task.name = nomtache;
       task.deadline = unedate;
       var reponse = await addtask(task);
-      //    listetache.add(reponse);
       print(reponse);
+      Navigator.pop(context);
 
       Navigator.push(
         context,

@@ -24,10 +24,33 @@ class _EcranAccueilState extends State<EcranAccueil> {
 
   List<HomeItemResponse> taches = [];
 
+  bool dialogVisible = false;
+
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Chargement en cours..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        dialogVisible = true;
+        return alert;
+      },
+    );
+  }
 
   void getHttpListTache() async {
     try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showLoaderDialog(context);
+      });
       this.taches = await ListTache();
+      if(dialogVisible)
+        Navigator.pop(context);
       setState(() {});
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

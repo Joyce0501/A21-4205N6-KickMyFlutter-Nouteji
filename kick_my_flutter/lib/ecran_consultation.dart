@@ -29,9 +29,45 @@ class _EcranConsultationState extends State<EcranConsultation> {
 
   TaskDetailResponse taskdetailresponse = TaskDetailResponse();
 
-  void getHttpdetailTache(int idtache) async {
+   showLoaderDialog(BuildContext context){
+     AlertDialog alert=AlertDialog(
+       content: new Row(
+         children: [
+           CircularProgressIndicator(),
+           Container(margin: EdgeInsets.only(left: 7),child:Text("Changement en cours..." )),
+         ],),
+     );
+     showDialog(barrierDismissible: false,
+       context:context,
+       builder:(BuildContext context){
+         return alert;
+       },
+     );
+   }
+
+   showLoaderDialogConsultation(BuildContext context){
+     AlertDialog alert=AlertDialog(
+       content: new Row(
+         children: [
+           CircularProgressIndicator(),
+           Container(margin: EdgeInsets.only(left: 7),child:Text("Chargement des détails..." )),
+         ],),
+     );
+     showDialog(barrierDismissible: false,
+       context:context,
+       builder:(BuildContext context){
+         return alert;
+       },
+     );
+   }
+
+   void getHttpdetailTache(int idtache) async {
     try{
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showLoaderDialogConsultation(context);
+      });
       this.taskdetailresponse = await taskdetail(idtache);
+      Navigator.pop(context);
       setState(() {});
     } catch (e) {
       print(e);
@@ -52,9 +88,13 @@ class _EcranConsultationState extends State<EcranConsultation> {
 
     else{
       try{
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          showLoaderDialog(context);
+        });
         var reponse = await taskpercentage(idtache, percentage);
         taskdetailresponse.percentageDone = nouveaupourcentage;
         print(reponse);
+        Navigator.pop(context);
         setState(() {});
 
       } catch (e) {

@@ -20,18 +20,36 @@ class _EcranInscriptionState extends State<EcranInscription> {
   String passwordInscription = "";
   String confirmationpassword = "";
 
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Inscription en cours..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
+
   inscription() async {
 
     if(passwordInscription.toString() == confirmationpassword.toString() )
     {
       try {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          showLoaderDialog(context);
+        });
         SignupRequest req = SignupRequest();
         req.username = nomInscription;
         req.password = passwordInscription;
-
         var reponse = await signup(req);
-
         print(reponse);
+        Navigator.pop(context);
 
         Navigator.push(
           context,
@@ -43,6 +61,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
       } on DioError catch(e) {
         print(e);
         String message = e.response!.data;
+        Navigator.of(context).pop();
         if (message == "BadCredentialsException") {
           print('login deja utilise');
         }
@@ -115,7 +134,6 @@ class _EcranInscriptionState extends State<EcranInscription> {
               )
           );
         }
-
       }
     }
      else{
