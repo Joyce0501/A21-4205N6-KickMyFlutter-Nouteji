@@ -34,7 +34,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
        content: new Row(
          children: [
            CircularProgressIndicator(),
-           Container(margin: EdgeInsets.only(left: 7),child:Text("Changement en cours..." )),
+           Container(margin: EdgeInsets.only(left: 7),child:Text( Locs.of(context).trans ("Changement en cours..." ))),
          ],),
      );
      showDialog(barrierDismissible: false,
@@ -50,7 +50,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
        content: new Row(
          children: [
            CircularProgressIndicator(),
-           Container(margin: EdgeInsets.only(left: 7),child:Text("Chargement des détails..." )),
+           Container(margin: EdgeInsets.only(left: 7),child:Text( Locs.of(context).trans ("Chargement des détails..." ))),
          ],),
      );
      showDialog(barrierDismissible: false,

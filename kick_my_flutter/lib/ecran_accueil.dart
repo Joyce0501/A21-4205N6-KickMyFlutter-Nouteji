@@ -31,7 +31,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Chargement en cours..." )),
+          Container(margin: EdgeInsets.only(left: 7),child:Text(Locs.of(context).trans("Chargement en cours..."))),
         ],),
     );
     showDialog(barrierDismissible: false,

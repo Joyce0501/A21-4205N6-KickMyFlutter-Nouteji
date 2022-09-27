@@ -25,7 +25,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Inscription en cours..." )),
+          Container(margin: EdgeInsets.only(left: 7),child:Text( Locs.of(context).trans ("Inscription en cours..." ))),
         ],),
     );
     showDialog(barrierDismissible: false,
@@ -71,7 +71,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
             context: context,
             builder: (BuildContext context) => AlertDialog(
               // title: const Text('AlertDialog Title'),
-              content: const Text('Nom utilisateur trop court'),
+              content:  Text(Locs.of(context).trans('Nom utilisateur trop court')),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -91,7 +91,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
             context: context,
             builder: (BuildContext context) => AlertDialog(
               // title: const Text('AlertDialog Title'),
-              content: const Text('Nom utilisateur deja pris'),
+              content:  Text(Locs.of(context).trans('Nom utilisateur deja pris')),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -111,7 +111,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
             context: context,
             builder: (BuildContext context) => AlertDialog(
               // title: const Text('AlertDialog Title'),
-              content: const Text('Mot de passe trop court'),
+              content:  Text(Locs.of(context).trans('Mot de passe trop court')),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -146,7 +146,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             // title: const Text('AlertDialog Title'),
-            content: const Text('Les mots de passe ne sont pas identiques'),
+            content:  Text(Locs.of(context).trans('Les mots de passe ne sont pas identiques')),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'OK'),

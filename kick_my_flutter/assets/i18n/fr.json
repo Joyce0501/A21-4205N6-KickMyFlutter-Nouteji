@@ -4,6 +4,23 @@
   "Nom" : "Nom",
   "Mot de passe" : "Mot de passe",
   "Confirmaton du mot de passe" : "Confirmation du mot de passe",
+  "Connexion en cours..." : "Connexion en cours...",
+  "login deja utilise" : "login deja utilise",
+  "Compte introuvable" : "Compte introuvable",
+  "OK" : "OK",
+
+  "Inscription en cours..." : "Inscription en cours...",
+  "Nom utilisateur trop court" : "Nom utilisateur trop court",
+  "Nom utilisateur deja pris" : "Nom utilisateur deja pris",
+  "Mot de passe trop court" : "Mot de passe trop court",
+  "Les mots de passe ne sont pas identiques" : "Les mots de passe ne sont pas identiques",
+
+
+  "Chargement en cours..." : "Chargement en cours...",
+
+  "Changement en cours..." : "Changement en cours...",
+
+  "Chargement des détails..." : "Chargement des détails...",
 
   "Creation de tache" : "Création de tache",
   "Entrer une date" : "Entrer une date",

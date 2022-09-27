@@ -30,7 +30,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Connexion en cours..." )),
+          Container(margin: EdgeInsets.only(left: 7),child:Text(Locs.of(context).trans ("Connexion en cours...") )),
         ],),
     );
     showDialog(barrierDismissible: false,
@@ -72,7 +72,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             // title: const Text('AlertDialog Title'),
-            content: const Text('Compte introuvable'),
+            content:  Text(Locs.of(context).trans("Compte introuvable")),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -86,6 +86,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
           ),
         );
       }
+
       else {
         print('autre erreurs');
         ScaffoldMessenger.of(context).showSnackBar(

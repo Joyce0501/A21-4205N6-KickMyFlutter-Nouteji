@@ -4,6 +4,24 @@
   "Nom" : "Username",
   "Mot de passe" : "Password",
   "Confirmaton du mot de passe" : "Password confirmation",
+  "Connexion en cours..." : "A connection occurs...",
+  "login deja utilise" : "Informations already use",
+  "Compte introuvable" : "Account not found",
+  "OK" : "OK",
+
+  "Inscription en cours..." : "An inscription occurs...",
+  "Nom utilisateur trop court" : "Username too short",
+  "Nom utilisateur deja pris" : "Username already taken",
+  "Mot de passe trop court" : "Password too short",
+  "Les mots de passe ne sont pas identiques" : "Passwords are not the same",
+
+
+  "Chargement en cours..." : "Loading...",
+
+  "Changement en cours..." : "Changes occur...",
+
+  "Chargement des détails..." : "Loading details...",
+
 
   "Creation de tache" : "Create a task",
   "Entrer une date" : "Enter a date",
