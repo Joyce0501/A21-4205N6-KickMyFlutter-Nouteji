@@ -1,6 +1,10 @@
 
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/tiroir_nav.dart';
@@ -24,6 +28,81 @@ class EcranConsultation extends StatefulWidget {
 const int POURCENT_NON_MODIFIE = -1;
 
 class _EcranConsultationState extends State<EcranConsultation> {
+
+  String imagePath = "";
+  String imageNetworkPath = "";
+  XFile? pickedImage;
+  List<XFile>? pickedImages;
+
+
+  //
+  // void getImage() async {
+  //   ImagePicker picker = ImagePicker();
+  //   pickedImage = await picker.pickImage(source : ImageSource.gallery);
+  //   imagePath = pickedImage!.path;
+  //   setState(() {});
+  // }
+  //
+  // void postImage() async {
+  //   FormData formData = FormData.fromMap({
+  //     "file": await MultipartFile.fromFile(
+  //         pickedImage!.path, filename: pickedImage!.name)
+  //   });
+  //   Dio dio = Dio();
+  //   var response = await dio.post(
+  //       "http://10.0.2.2:8080/file", data: formData);
+  //   String imageID = response.data as String;
+  //   imageNetworkPath = "http://10.0.2.2:8080/file/" + imageID;
+  //   setState(() {});
+  // }
+
+
+  final picker = ImagePicker();
+
+  // on met le fichier dans l'etat pour l'afficher dans la page
+  var _imageFile = null;
+
+  Future<String> sendPicture(int babyID, File file) async {
+    FormData formData = FormData.fromMap({
+      // TODO on peut ajouter d'autres champs que le fichier d'ou le nom multipart
+      "babyID": babyID,
+      // TODO on peut mettre le nom du fichier d'origine si necessaire
+      "file" : await MultipartFile.fromFile(file.path ,filename: "image.jpg")
+    });
+    // TODO changer la base de l'url pour l'endroit ou roule ton serveur
+    var url = "https://exercices-web.herokuapp.com/exos/fileasmultipart";
+    var response = await Dio().post(url, data: formData);
+    print(response.data);
+    return "";
+  }
+
+  Future getImage() async {
+    print("ouverture du selecteur d'image");
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      print("l'image a ete choisie " + pickedFile.path.toString());
+      _imageFile = File(pickedFile.path);
+      setState(() {});
+      // TODO envoi au server
+      print("debut de l'envoi , pensez a indiquer a l'utilisateur que ca charge " + DateTime.now().toString() );
+      sendPicture(12, _imageFile).then(
+              (res) {
+            setState(() {
+              print("fin de l'envoi , pensez a indiquer a l'utilisateur que ca charge " + DateTime.now().toString() );
+
+              // TODO mettre a jour interface graphique
+            });
+          }
+      ).catchError(
+              (err) {
+            // TODO afficher un message a l'utilisateur pas marche
+            print(err);
+          }
+      );
+    } else {
+      print('Pas de choix effectue.');
+    }
+  }
 
    int nouveaupourcentage = POURCENT_NON_MODIFIE;
 
@@ -167,7 +246,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
                     child:
                     Text(Locs.of(context).trans('Pourcentage de temps ecoule') + " : " + taskdetailresponse.percentageTimeSpent.toString()),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: TextFormField(
@@ -188,6 +266,11 @@ class _EcranConsultationState extends State<EcranConsultation> {
                         }
                     ),
                   ),
+
+                  (imageNetworkPath == "")
+                      ? Text ("Envoie")
+                      : Image.network(imageNetworkPath),
+
                 ]
             ),
        ),
@@ -206,6 +289,17 @@ class _EcranConsultationState extends State<EcranConsultation> {
                   },
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Expanded(
+                  child: MaterialButton(
+                    child: Text("image"),
+                    color: Colors.blue,
+                    onPressed: getImage,
+                  ),
+                ),
+              ),
+     //         ElevatedButton(onPressed:postImage, child: Text("Envoyer image su serveur")),
             ],
           ),
         ],

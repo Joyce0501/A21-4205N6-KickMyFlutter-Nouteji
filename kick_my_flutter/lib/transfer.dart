@@ -81,6 +81,7 @@ class  TaskDetailResponse  {
    int percentageDone = 0;
    double percentageTimeSpent = 0;
 
+
   @JsonKey(fromJson: _fromJson, toJson: _toJson)
   late DateTime deadline = DateTime.now();
 
