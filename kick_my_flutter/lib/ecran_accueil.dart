@@ -100,6 +100,28 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
+                    // leading: CircleAvatar(
+                    //   backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
+                    // ),
+                    title: CircleAvatar(
+                      backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()+"?width=70"),
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                        ),
+                      );
+                    },
+                    // leading: CircleAvatar(
+                    //   backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
+                    //   ),
                     title: Text( this.taches[index].name,
                       style: TextStyle(
                         fontSize: 15.0,
@@ -110,6 +132,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     ),
                   ),
                 ),
+
                 Expanded(
                   child: ListTile(
                     onTap: () {

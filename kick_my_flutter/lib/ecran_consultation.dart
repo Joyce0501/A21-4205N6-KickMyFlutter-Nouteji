@@ -35,7 +35,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
   List<XFile>? pickedImages;
 
 
-  //
+
   // void getImage() async {
   //   ImagePicker picker = ImagePicker();
   //   pickedImage = await picker.pickImage(source : ImageSource.gallery);
@@ -62,19 +62,21 @@ class _EcranConsultationState extends State<EcranConsultation> {
   // on met le fichier dans l'etat pour l'afficher dans la page
   var _imageFile = null;
 
-  Future<String> sendPicture(int babyID, File file) async {
+  Future<String> sendPicture(int taskID, File file) async {
     FormData formData = FormData.fromMap({
       // TODO on peut ajouter d'autres champs que le fichier d'ou le nom multipart
-      "babyID": babyID,
+     // "babyID": babyID,
       // TODO on peut mettre le nom du fichier d'origine si necessaire
-      "file" : await MultipartFile.fromFile(file.path ,filename: "image.jpg")
+      "file" : await MultipartFile.fromFile(file.path ,filename: "image.jpg"),
+      "taskID" : this.taskdetailresponse.id,
     });
     // TODO changer la base de l'url pour l'endroit ou roule ton serveur
-    var url = "https://exercices-web.herokuapp.com/exos/fileasmultipart";
+    var url = "http://10.0.2.2:8080/file";
     var response = await Dio().post(url, data: formData);
     print(response.data);
     return "";
   }
+
 
   Future getImage() async {
     print("ouverture du selecteur d'image");
@@ -246,6 +248,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
                     child:
                     Text(Locs.of(context).trans('Pourcentage de temps ecoule') + " : " + taskdetailresponse.percentageTimeSpent.toString()),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: TextFormField(
@@ -266,16 +269,24 @@ class _EcranConsultationState extends State<EcranConsultation> {
                         }
                     ),
                   ),
-
-                  (imageNetworkPath == "")
-                      ? Text ("Envoie")
-                      : Image.network(imageNetworkPath),
-
+                  // (imageNetworkPath == "")
+                  //     ? Text ("Envoie")
+                  //     : Image.network(imageNetworkPath),
                 ]
             ),
        ),
     ),
 
+          Row(
+            children: [
+              Expanded(
+                  flex: 10,
+                  child:
+                  Image.network('http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString())
+              ),
+              //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
+            ],
+          ),
 
           Row(
             children: [
@@ -299,7 +310,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
                   ),
                 ),
               ),
-     //         ElevatedButton(onPressed:postImage, child: Text("Envoyer image su serveur")),
+        //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
             ],
           ),
         ],

@@ -65,6 +65,7 @@ class HomeItemResponse {
   late int id;
   late String name;
   late int percentageDone;
+  late int? photoId;
   late double percentageTimeSpent;
   late DateTime deadline = DateTime.now();
 
@@ -79,6 +80,7 @@ class  TaskDetailResponse  {
    int id = 0;
    String name = "";
    int percentageDone = 0;
+   int? photoId = 0;
    double percentageTimeSpent = 0;
 
 

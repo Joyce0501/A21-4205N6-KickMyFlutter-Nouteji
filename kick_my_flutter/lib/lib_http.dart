@@ -67,7 +67,7 @@ Future addtask(AddTaskRequest task) async {
 
 Future<List<HomeItemResponse>> ListTache() async {
   try {
-    var response = await SingletonDio.getDio().get('http://10.0.2.2:8080/api/home');
+    var response = await SingletonDio.getDio().get('http://10.0.2.2:8080/api/home/photo');
     print(response);
     var listeJSON = response.data as List;
     var listeTache = listeJSON.map(
@@ -87,7 +87,7 @@ Future<List<HomeItemResponse>> ListTache() async {
 Future<TaskDetailResponse>taskdetail(int idtache) async {
   try {
     var response = await SingletonDio.getDio().get(
-        'http://10.0.2.2:8080/api/detail/'+idtache.toString());
+        'http://10.0.2.2:8080/api/detail/photo/'+idtache.toString());
 
  //   'http://10.0.2.2:8080/api/detail/?id=''$idtache');
 
