@@ -74,6 +74,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
     var url = "http://10.0.2.2:8080/file";
     var response = await Dio().post(url, data: formData);
     print(response.data);
+    getHttpdetailTache(widget.le_parametre);
     return "";
   }
 
@@ -87,7 +88,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
       setState(() {});
       // TODO envoi au server
       print("debut de l'envoi , pensez a indiquer a l'utilisateur que ca charge " + DateTime.now().toString() );
-      sendPicture(12, _imageFile).then(
+      sendPicture(taskdetailresponse.id, _imageFile).then(
               (res) {
             setState(() {
               print("fin de l'envoi , pensez a indiquer a l'utilisateur que ca charge " + DateTime.now().toString() );
@@ -101,7 +102,8 @@ class _EcranConsultationState extends State<EcranConsultation> {
             print(err);
           }
       );
-    } else {
+    }
+    else {
       print('Pas de choix effectue.');
     }
   }
@@ -282,35 +284,65 @@ class _EcranConsultationState extends State<EcranConsultation> {
               Expanded(
                   flex: 10,
                   child:
+                /*  (taskdetailresponse.photoId.toString() == 0 ) ?
+                  Text("Aucune image pour cette tache") :*/
                   Image.network('http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString())
               ),
               //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
             ],
           ),
 
+        //   Row(
+        //     children: [
+        //       Expanded(
+        //         child: MaterialButton(
+        //           child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
+        //           color: Colors.blue,
+        //           onPressed: () {
+        //             changepercentage(widget.le_parametre, nouveaupourcentage);
+        //             //    setState(() {});
+        //           },
+        //         ),
+        //       ),
+        //       Padding(
+        //         padding: const EdgeInsets.all(8.0),
+        //         child: Expanded(
+        //           child: MaterialButton(
+        //             child: Text("image"),
+        //             color: Colors.blue,
+        //             onPressed: getImage,
+        //           ),
+        //         ),
+        //       ),
+        // //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
+        //     ],
+        //   ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: MaterialButton(
-                  child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
-                  color: Colors.blue,
-                  onPressed: () {
-                    changepercentage(widget.le_parametre, nouveaupourcentage);
-                    //    setState(() {});
-                  },
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Expanded(
+                  child: MaterialButton(
+                    child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
+                    color: Colors.blue,
+                    onPressed: () {
+                      changepercentage(widget.le_parametre, nouveaupourcentage);
+                      setState(() {});
+                    },
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Expanded(
                   child: MaterialButton(
-                    child: Text("image"),
+                    child: Text("Select an image"),
                     color: Colors.blue,
                     onPressed: getImage,
                   ),
                 ),
               ),
-        //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
             ],
           ),
         ],

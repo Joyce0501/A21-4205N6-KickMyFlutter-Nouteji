@@ -27,6 +27,10 @@
   "Entrer une date" : "Enter a date",
   "Nom de la tache" : "Task's name",
   "Creation" : "Creation",
+  "Création de la tache en cours..." : "Creating task in progress...",
+  "Le nom de tache entre existe deja" : "Task's name already taken",
+  "Le nom de tache entre est trop court" : "Task's name too short",
+  "Nom de tache non entre" : "Task's name space empty",
 
 
   "Consultation" : "Consultation",

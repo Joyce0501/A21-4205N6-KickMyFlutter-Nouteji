@@ -27,7 +27,7 @@ class _EcranCreationState extends State<EcranCreation> {
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Création de la tache en cours..." )),
+          Container(margin: EdgeInsets.only(left: 7),child:Text(Locs.of(context).trans("Création de la tache en cours..."))),
         ],),
     );
     showDialog(barrierDismissible: false,
@@ -70,7 +70,7 @@ class _EcranCreationState extends State<EcranCreation> {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             // title: const Text('AlertDialog Title'),
-            content: const Text('Le nom de tache entre existe deja'),
+            content: Text(Locs.of(context).trans("Le nom de tache entre existe deja")),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -91,7 +91,7 @@ class _EcranCreationState extends State<EcranCreation> {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             // title: const Text('AlertDialog Title'),
-            content: const Text('Le nom de tache entre est trop court'),
+            content: Text(Locs.of(context).trans("Le nom de tache entre est trop court")),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -112,7 +112,7 @@ class _EcranCreationState extends State<EcranCreation> {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             // title: const Text('AlertDialog Title'),
-            content: const Text('Nom de tache non entre'),
+            content:  Text(Locs.of(context).trans("Nom de tache non entre")),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),

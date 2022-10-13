@@ -104,7 +104,9 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     //   backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
                     // ),
                     title: CircleAvatar(
-                      backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()+"?width=70"),
+                      // TODO : mettre une width par la suite
+                      backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
+                    //backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70"),
                     ),
                   ),
                 ),

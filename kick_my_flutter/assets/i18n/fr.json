@@ -26,6 +26,10 @@
   "Entrer une date" : "Entrer une date",
   "Nom de la tache" : "Nom de la tache",
   "Creation" : "Création",
+  "Création de la tache en cours..." : "Création de la tache en cours...",
+  "Le nom de tache entre existe deja" : "Le nom de tache entre existe deja",
+  "Le nom de tache entre est trop court" : "Le nom de tache entre est trop court",
+  "Nom de tache non entre" : "Nom de tache non entre",
 
   "Consultation" : "Consultation",
   "Nom de la tache" : "Nom de la tache",
