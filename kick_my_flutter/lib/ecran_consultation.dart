@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -211,141 +212,119 @@ class _EcranConsultationState extends State<EcranConsultation> {
           title: Text(Locs.of(context).trans('Consultation')),
         ),
 
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+           // Text(widget.le_parametre.toString())
 
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-         // Text(widget.le_parametre.toString())
+        Container(
+        margin: EdgeInsets.all(5),
+        width: double.infinity,
+        height: 200,
+        child:  Expanded(
+          child:
+              Column(
 
-      Container(
-      margin: EdgeInsets.all(5),
-      width: double.infinity,
-      height: 200,
-      child:  Expanded(
-        child:
-            Column(
+                  children:[
+                    Expanded(
+                      flex: 2,
+                      child:
+                      Text(Locs.of(context).trans('Nom de la tache') + " : " + taskdetailresponse.name),
+                    ),
 
-                children:[
-                  Expanded(
-                    flex: 2,
-                    child:
-                    Text(Locs.of(context).trans('Nom de la tache') + " : " + taskdetailresponse.name),
-                  ),
+                    Expanded(
+                      flex: 2,
+                      child:
+                      Text(Locs.of(context).trans('Date decheance de la tache') + " : " + DateFormat.yMd("fr_FR").format(taskdetailresponse.deadline)),
+                    ),
 
-                  Expanded(
-                    flex: 2,
-                    child:
-                    Text(Locs.of(context).trans('Date decheance de la tache') + " : " + DateFormat.yMd("fr_FR").format(taskdetailresponse.deadline)),
-                  ),
+                    Expanded(
+                      flex: 2,
+                      child:
+                      Text(Locs.of(context).trans('Pourcentage davancement') + " : " + taskdetailresponse.percentageDone.toString()),
 
-                  Expanded(
-                    flex: 2,
-                    child:
-                    Text(Locs.of(context).trans('Pourcentage davancement') + " : " + taskdetailresponse.percentageDone.toString()),
+                    ),
 
-                  ),
+                    Expanded(
+                      flex: 2,
+                      child:
+                      Text(Locs.of(context).trans('Pourcentage de temps ecoule') + " : " + taskdetailresponse.percentageTimeSpent.toString()),
+                    ),
 
-                  Expanded(
-                    flex: 2,
-                    child:
-                    Text(Locs.of(context).trans('Pourcentage de temps ecoule') + " : " + taskdetailresponse.percentageTimeSpent.toString()),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: TextFormField(
-                        decoration: InputDecoration(labelText: Locs.of(context).trans('Entrer le nouveau pourcentage'),
-                            labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                  color: Colors.grey
-                              ),
-                            )),
-                        onChanged: (pourcentage) {
-                          try {
-                            nouveaupourcentage = int.parse(pourcentage);
-                          } catch(e) {
-                            nouveaupourcentage = POURCENT_NON_MODIFIE;
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: TextFormField(
+                          decoration: InputDecoration(labelText: Locs.of(context).trans('Entrer le nouveau pourcentage'),
+                              labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                    color: Colors.grey
+                                ),
+                              )),
+                          onChanged: (pourcentage) {
+                            try {
+                              nouveaupourcentage = int.parse(pourcentage);
+                            } catch(e) {
+                              nouveaupourcentage = POURCENT_NON_MODIFIE;
+                            }
                           }
-                        }
+                      ),
+                    ),
+                    // (imageNetworkPath == "")
+                    //     ? Text ("Envoie")
+                    //     : Image.network(imageNetworkPath),
+                  ]
+              ),
+         ),
+    ),
+            Row(
+              children: [
+                Expanded(
+                    child:
+                    (taskdetailresponse.photoId == 0 ) ?
+                    Text("Aucune image pour cette tache") :
+                    CachedNetworkImage(
+                      imageUrl: 'http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString(),
+                      placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                   // Image.network('http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString())
+                ),
+                //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
+                      color: Colors.blue,
+                      onPressed: () {
+                        changepercentage(widget.le_parametre, nouveaupourcentage);
+                        setState(() {});
+                      },
                     ),
                   ),
-                  // (imageNetworkPath == "")
-                  //     ? Text ("Envoie")
-                  //     : Image.network(imageNetworkPath),
-                ]
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      child: Text("Select an image"),
+                      color: Colors.blue,
+                      onPressed: getImage,
+                    ),
+                  ),
+                ),
+              ],
             ),
-       ),
-    ),
-
-          Row(
-            children: [
-              Expanded(
-                  flex: 10,
-                  child:
-                /*  (taskdetailresponse.photoId.toString() == 0 ) ?
-                  Text("Aucune image pour cette tache") :*/
-                  Image.network('http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString())
-              ),
-              //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
-            ],
-          ),
-
-        //   Row(
-        //     children: [
-        //       Expanded(
-        //         child: MaterialButton(
-        //           child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
-        //           color: Colors.blue,
-        //           onPressed: () {
-        //             changepercentage(widget.le_parametre, nouveaupourcentage);
-        //             //    setState(() {});
-        //           },
-        //         ),
-        //       ),
-        //       Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: Expanded(
-        //           child: MaterialButton(
-        //             child: Text("image"),
-        //             color: Colors.blue,
-        //             onPressed: getImage,
-        //           ),
-        //         ),
-        //       ),
-        // //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
-        //     ],
-        //   ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: MaterialButton(
-                    child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
-                    color: Colors.blue,
-                    onPressed: () {
-                      changepercentage(widget.le_parametre, nouveaupourcentage);
-                      setState(() {});
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: MaterialButton(
-                    child: Text("Select an image"),
-                    color: Colors.blue,
-                    onPressed: getImage,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );

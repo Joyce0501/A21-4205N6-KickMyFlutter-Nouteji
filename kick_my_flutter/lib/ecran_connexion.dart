@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:kick_my_flutter/ecran_inscription.dart';
 import 'package:dio/dio.dart';
@@ -64,7 +63,23 @@ class _EcranConnexionState extends State<EcranConnexion> {
       String message = e.response!.data;
       Navigator.of(context).pop();
       if (message == "BadCredentialsException") {
-        print('login deja utilise');
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content:  Text(Locs.of(context).trans("Compte introuvable")),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
       }
       else if(message == "InternalAuthenticationServiceException")
       {
@@ -86,7 +101,6 @@ class _EcranConnexionState extends State<EcranConnexion> {
           ),
         );
       }
-
       else {
         print('autre erreurs');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -99,27 +113,42 @@ class _EcranConnexionState extends State<EcranConnexion> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // TODO decommenter la ligne suivante
-      //  drawer: LeTiroir(),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(Locs.of(context).trans('Connexion')),
       ),
-      body: Column(
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.landscape) {
+            return buildPaysage();
+          } else {
+            return buildPortrait();
+          }
+        },
+      ),
+    );
+  }
 
+  Widget buildPortrait() {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      // TODO decommenter la ligne suivante
+      //  drawer: LeTiroir(),
+      // appBar: AppBar(
+      //   // Here we take the value from the MyHomePage object that was created by
+      //   // the App.build method, and use it to set our appbar title.
+      //   title: Text(Locs.of(context).trans('Connexion')),
+      // ),
+      body: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-
-          // const Text(
-          //   'Nom',
-          // ),
           Padding(
             padding: const EdgeInsets.all(50),
             child: TextFormField(
@@ -191,6 +220,95 @@ class _EcranConnexionState extends State<EcranConnexion> {
           ),
 
         ],
+      ),
+    );
+  }
+
+  Widget buildPaysage() {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      // TODO decommenter la ligne suivante
+      //  drawer: LeTiroir(),
+      // appBar: AppBar(
+      //   // Here we take the value from the MyHomePage object that was created by
+      //   // the App.build method, and use it to set our appbar title.
+      //   title: Text(Locs.of(context).trans('Connexion')),
+      // ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+           // Padding(
+           //   padding: const EdgeInsets.all(50),
+               TextFormField(
+                  decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
+                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                            color: Colors.grey
+                        ),
+                      )),
+                  onChanged: (nom) {
+                    nomConnexion = nom;
+                  }
+              ),
+          //  ),
+
+         //   Padding(
+           //   padding: const EdgeInsets.all(50),
+               TextFormField(
+                  decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
+                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                            color: Colors.grey
+                        ),
+                      )),
+                  obscureText: true,
+                  onChanged: (password) {
+                    passwordConnexion = password;
+                  }
+              ),
+           // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      child: Text(Locs.of(context).trans('Connexion')),
+                      color: Colors.blue,
+                      onPressed:
+                      connexion,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EcranInscription(),
+                          ),
+                        );
+                      },
+                      child: Text(Locs.of(context).trans('Inscription')),
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+          ],
+        ),
       ),
     );
   }

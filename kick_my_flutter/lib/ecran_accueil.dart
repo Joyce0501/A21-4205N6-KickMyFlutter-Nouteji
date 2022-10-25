@@ -8,7 +8,7 @@ import 'package:kick_my_flutter/lib_http.dart';
 import 'package:kick_my_flutter/transfer.dart';
 import 'package:kick_my_flutter/tiroir_nav.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'i18n/intl_localization.dart';
 
 
@@ -91,7 +91,29 @@ class _EcranAccueilState extends State<EcranAccueil> {
             return Row(
               children: [
                 Expanded(
-                  child: ListTile(
+                  child:
+                  this.taches[index].photoId == 0?
+
+            ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EcranConsultation(le_parametre:this.taches[index].id),
+                ),
+              );
+            },
+              title: Text("Aucune image",
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            )
+
+              :
+                  ListTile(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -100,14 +122,17 @@ class _EcranAccueilState extends State<EcranAccueil> {
                         ),
                       );
                     },
-                    // leading: CircleAvatar(
-                    //   backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
-                    // ),
-                    title: CircleAvatar(
+                    title:
+                 //   CircleAvatar(
                       // TODO : mettre une width par la suite
-                      backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString()),
-                    //backgroundImage: NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70"),
-                    ),
+                  //    backgroundImage:
+                      CachedNetworkImage(
+                        imageUrl: 'http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70",
+                        placeholder: (context, url) => CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                  //    NetworkImage('http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70"),
+                  //  ),
                   ),
                 ),
 
@@ -126,7 +151,6 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     //   ),
                     title: Text( this.taches[index].name,
                       style: TextStyle(
-                        fontSize: 15.0,
                         fontWeight: FontWeight.w500,
                   //      color: Colors.black,
                         fontStyle: FontStyle.italic,
@@ -190,7 +214,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                     },
                     title: Text(DateFormat.yMd("fr_FR").format(this.taches[index].deadline),
                       style: TextStyle(
-                        fontSize: 12.0,
+                      //  fontSize: 10.0,
                           fontWeight: FontWeight.w500,
                           //  color: Colors.black,
                         fontStyle: FontStyle.italic,
