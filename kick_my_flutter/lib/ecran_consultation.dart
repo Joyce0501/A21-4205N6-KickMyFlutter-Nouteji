@@ -284,7 +284,8 @@ class _EcranConsultationState extends State<EcranConsultation> {
                 Expanded(
                     child:
                     (taskdetailresponse.photoId == 0 ) ?
-                    Text("Aucune image pour cette tache") :
+                    Text(Locs.of(context).trans('Aucune image pour cette tache'))
+                        :
                     CachedNetworkImage(
                       imageUrl: 'http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString(),
                       placeholder: (context, url) => CircularProgressIndicator(),

@@ -103,7 +103,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                 ),
               );
             },
-              title: Text("Aucune image",
+              title: Text(Locs.of(context).trans("Aucune image"),
                 style: TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.w500,
