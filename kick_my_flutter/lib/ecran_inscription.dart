@@ -190,123 +190,32 @@ class _EcranInscriptionState extends State<EcranInscription> {
     //     // the App.build method, and use it to set our appbar title.
     //     title: Text(Locs.of(context).trans('Inscription')),
     //   ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("Inscription", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-
-          Padding(
-            padding: const EdgeInsets.all(50),
-            child: TextFormField(
-              decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
-                  labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        color: Colors.grey
-                    ),
-                  )),
-              onChanged: (nom) {
-                nomInscription = nom;
-              }
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(50),
-            child: TextFormField(
-              decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
-                  labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        color: Colors.grey
-                    ),
-                  )),
-              onChanged: (password) {
-                passwordInscription = password;
-              },
-              obscureText: true,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(50),
-            child: TextFormField(
-              decoration: InputDecoration(labelText: Locs.of(context).trans('Confirmaton du mot de passe'),
-                  labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        color: Colors.grey
-                    ),
-                  )),
-              obscureText: true,
-              onChanged: (passwordconfirmation) {
-                confirmationpassword = passwordconfirmation;
-              },
-            ),
-          ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: MaterialButton(
-                    child: Text(Locs.of(context).trans('Inscription')),
-                    color: Colors.blue,
-                    onPressed:
-                    inscription,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildPaysage() {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // TODO decommenter la ligne suivante
-      //  drawer: LeTiroir(),
-      //   appBar: AppBar(
-      //     // Here we take the value from the MyHomePage object that was created by
-      //     // the App.build method, and use it to set our appbar title.
-      //     title: Text(Locs.of(context).trans('Inscription')),
-      //   ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("Inscription", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
 
-          //  Padding(
-           //   padding: const EdgeInsets.all(50),
-            //  child:
-              TextFormField(
-                  decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        ),
-                      )),
-                  onChanged: (nom) {
-                    nomInscription = nom;
-                  }
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
+                    labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          color: Colors.grey
+                      ),
+                    )),
+                onChanged: (nom) {
+                  nomInscription = nom;
+                }
               ),
-           // ),
+            ),
 
-          //  Padding(
-           //   padding: const EdgeInsets.all(50),
-            //  child:
-              TextFormField(
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
                 decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
                     labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                     enabledBorder: OutlineInputBorder(
@@ -320,11 +229,10 @@ class _EcranInscriptionState extends State<EcranInscription> {
                 },
                 obscureText: true,
               ),
-          //  ),
-         //   Padding(
-            //  padding: const EdgeInsets.all(50),
-            //  child:
-              TextFormField(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
                 decoration: InputDecoration(labelText: Locs.of(context).trans('Confirmaton du mot de passe'),
                     labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                     enabledBorder: OutlineInputBorder(
@@ -338,7 +246,7 @@ class _EcranInscriptionState extends State<EcranInscription> {
                   confirmationpassword = passwordconfirmation;
                 },
               ),
-         //   ),
+            ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -362,4 +270,188 @@ class _EcranInscriptionState extends State<EcranInscription> {
       ),
     );
   }
+
+  Widget buildPaysage() {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      // TODO decommenter la ligne suivante
+      //  drawer: LeTiroir(),
+      //   appBar: AppBar(
+      //     // Here we take the value from the MyHomePage object that was created by
+      //     // the App.build method, and use it to set our appbar title.
+      //     title: Text(Locs.of(context).trans('Inscription')),
+      //   ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("Inscription", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
+                  decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
+                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                            color: Colors.grey
+                        ),
+                      )),
+                  onChanged: (nom) {
+                    nomInscription = nom;
+                  }
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
+                    labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          color: Colors.grey
+                      ),
+                    )),
+                onChanged: (password) {
+                  passwordInscription = password;
+                },
+                obscureText: true,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: Locs.of(context).trans('Confirmaton du mot de passe'),
+                    labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          color: Colors.grey
+                      ),
+                    )),
+                obscureText: true,
+                onChanged: (passwordconfirmation) {
+                  confirmationpassword = passwordconfirmation;
+                },
+              ),
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      child: Text(Locs.of(context).trans('Inscription')),
+                      color: Colors.blue,
+                      onPressed:
+                      inscription,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Widget buildPaysage() {
+  //   return Scaffold(
+  //     resizeToAvoidBottomInset: false,
+  //     // TODO decommenter la ligne suivante
+  //     //  drawer: LeTiroir(),
+  //     //   appBar: AppBar(
+  //     //     // Here we take the value from the MyHomePage object that was created by
+  //     //     // the App.build method, and use it to set our appbar title.
+  //     //     title: Text(Locs.of(context).trans('Inscription')),
+  //     //   ),
+  //     body:
+  //        Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           Text("Inscription", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+  //
+  //         //  Padding(
+  //          //   padding: const EdgeInsets.all(50),
+  //           //  child:
+  //             TextFormField(
+  //                 decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
+  //                     labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+  //                     enabledBorder: OutlineInputBorder(
+  //                       borderRadius: BorderRadius.circular(10),
+  //                       borderSide: BorderSide(
+  //                           color: Colors.grey
+  //                       ),
+  //                     )),
+  //                 onChanged: (nom) {
+  //                   nomInscription = nom;
+  //                 }
+  //             ),
+  //          // ),
+  //
+  //         //  Padding(
+  //          //   padding: const EdgeInsets.all(50),
+  //           //  child:
+  //             TextFormField(
+  //               decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
+  //                   labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+  //                   enabledBorder: OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(10),
+  //                     borderSide: BorderSide(
+  //                         color: Colors.grey
+  //                     ),
+  //                   )),
+  //               onChanged: (password) {
+  //                 passwordInscription = password;
+  //               },
+  //               obscureText: true,
+  //             ),
+  //         //  ),
+  //        //   Padding(
+  //           //  padding: const EdgeInsets.all(50),
+  //           //  child:
+  //             TextFormField(
+  //               decoration: InputDecoration(labelText: Locs.of(context).trans('Confirmaton du mot de passe'),
+  //                   labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+  //                   enabledBorder: OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(10),
+  //                     borderSide: BorderSide(
+  //                         color: Colors.grey
+  //                     ),
+  //                   )),
+  //               obscureText: true,
+  //               onChanged: (passwordconfirmation) {
+  //                 confirmationpassword = passwordconfirmation;
+  //               },
+  //             ),
+  //        //   ),
+  //
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //
+  //               Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Expanded(
+  //                   child: MaterialButton(
+  //                     child: Text(Locs.of(context).trans('Inscription')),
+  //                     color: Colors.blue,
+  //                     onPressed:
+  //                     inscription,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  // }
 }

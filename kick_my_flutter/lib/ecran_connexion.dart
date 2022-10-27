@@ -145,81 +145,84 @@ class _EcranConnexionState extends State<EcranConnexion> {
       //   // the App.build method, and use it to set our appbar title.
       //   title: Text(Locs.of(context).trans('Connexion')),
       // ),
-      body: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-          Padding(
-            padding: const EdgeInsets.all(50),
-            child: TextFormField(
-              decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
-                  labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        color: Colors.grey
+      body:
+      SingleChildScrollView(
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
+                    labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          color: Colors.grey
+                      ),
+                    )),
+                  onChanged: (nom) {
+                    nomConnexion = nom;
+                  }
+              ),
+            ),
+            // const Text(
+            //   'Mot de passe',
+            // ),
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
+                labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.grey
+                  ),
+                )),
+                obscureText: true,
+                  onChanged: (password) {
+                    passwordConnexion = password;
+                  }
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      child: Text(Locs.of(context).trans('Connexion')),
+                      color: Colors.blue,
+                      onPressed:
+                        connexion,
                     ),
-                  )),
-                onChanged: (nom) {
-                  nomConnexion = nom;
-                }
-            ),
-          ),
-          // const Text(
-          //   'Mot de passe',
-          // ),
-          Padding(
-            padding: const EdgeInsets.all(50),
-            child: TextFormField(
-              decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
-              labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.grey
-                ),
-              )),
-              obscureText: true,
-                onChanged: (password) {
-                  passwordConnexion = password;
-                }
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: MaterialButton(
-                    child: Text(Locs.of(context).trans('Connexion')),
-                    color: Colors.blue,
-                    onPressed:
-                      connexion,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Expanded(
-                  child: MaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EcranInscription(),
-                        ),
-                      );
-                    },
-                    child: Text(Locs.of(context).trans('Inscription')),
-                    color: Colors.blue,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EcranInscription(),
+                          ),
+                        );
+                      },
+                      child: Text(Locs.of(context).trans('Inscription')),
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -239,9 +242,9 @@ class _EcranConnexionState extends State<EcranConnexion> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-           // Padding(
-           //   padding: const EdgeInsets.all(50),
-               TextFormField(
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
                   decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
                       labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
@@ -254,11 +257,13 @@ class _EcranConnexionState extends State<EcranConnexion> {
                     nomConnexion = nom;
                   }
               ),
-          //  ),
-
-         //   Padding(
-           //   padding: const EdgeInsets.all(50),
-               TextFormField(
+            ),
+            // const Text(
+            //   'Mot de passe',
+            // ),
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: TextFormField(
                   decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
                       labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
@@ -272,7 +277,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
                     passwordConnexion = password;
                   }
               ),
-           // ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -312,4 +317,92 @@ class _EcranConnexionState extends State<EcranConnexion> {
       ),
     );
   }
+
+  // Widget buildPaysage() {
+  //   return Scaffold(
+  //     resizeToAvoidBottomInset: false,
+  //     // TODO decommenter la ligne suivante
+  //     //  drawer: LeTiroir(),
+  //     // appBar: AppBar(
+  //     //   // Here we take the value from the MyHomePage object that was created by
+  //     //   // the App.build method, and use it to set our appbar title.
+  //     //   title: Text(Locs.of(context).trans('Connexion')),
+  //     // ),
+  //     body:
+  //      Column(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: <Widget>[
+  //           Text(Locs.of(context).trans('Connexion'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+  //          // Padding(
+  //          //   padding: const EdgeInsets.all(50),
+  //              TextFormField(
+  //                 decoration: InputDecoration(labelText: Locs.of(context).trans('Nom'),
+  //                     labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+  //                     enabledBorder: OutlineInputBorder(
+  //                       borderRadius: BorderRadius.circular(10),
+  //                       borderSide: BorderSide(
+  //                           color: Colors.grey
+  //                       ),
+  //                     )),
+  //                 onChanged: (nom) {
+  //                   nomConnexion = nom;
+  //                 }
+  //             ),
+  //         //  ),
+  //
+  //        //   Padding(
+  //          //   padding: const EdgeInsets.all(50),
+  //              TextFormField(
+  //                 decoration: InputDecoration(labelText: Locs.of(context).trans('Mot de passe'),
+  //                     labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+  //                     enabledBorder: OutlineInputBorder(
+  //                       borderRadius: BorderRadius.circular(10),
+  //                       borderSide: BorderSide(
+  //                           color: Colors.grey
+  //                       ),
+  //                     )),
+  //                 obscureText: true,
+  //                 onChanged: (password) {
+  //                   passwordConnexion = password;
+  //                 }
+  //             ),
+  //          // ),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Expanded(
+  //                   child: MaterialButton(
+  //                     child: Text(Locs.of(context).trans('Connexion')),
+  //                     color: Colors.blue,
+  //                     onPressed:
+  //                     connexion,
+  //                   ),
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Expanded(
+  //                   child: MaterialButton(
+  //                     onPressed: () {
+  //                       Navigator.push(
+  //                         context,
+  //                         MaterialPageRoute(
+  //                           builder: (context) => EcranInscription(),
+  //                         ),
+  //                       );
+  //                     },
+  //                     child: Text(Locs.of(context).trans('Inscription')),
+  //                     color: Colors.blue,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //
+  //         ],
+  //       ),
+  //   );
+  // }
 }

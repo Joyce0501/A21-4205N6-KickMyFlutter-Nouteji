@@ -179,7 +179,105 @@ class _EcranCreationState extends State<EcranCreation> {
       //   // the App.build method, and use it to set our appbar title.
       //   title: Text(Locs.of(context).trans('Creation')),
       // ),
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(Locs.of(context).trans('Creation de tache'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+
+                // const Text(
+                //   'Nom',
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: Locs.of(context).trans('Nom de la tache'),
+                        labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                              color: Colors.grey
+                          ),
+                        )),
+                    onChanged: (nom) {
+                      nomtache = nom;
+                    }
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: TextFormField(
+
+                    controller: dateinput, //editing controller of this TextField
+                    decoration: InputDecoration(
+                        //icon: Icon(Icons.calendar_today), //icon of text field
+                        labelText: Locs.of(context).trans('Entrer une date') ,//label text of field
+                        labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                            color: Colors.grey
+                        ),
+                      )
+                    ),
+                    readOnly: true,  //set it true, so that user will not able to edit text
+                    onTap: () async {
+
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context, initialDate: DateTime.now(),
+                          firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
+                          lastDate: DateTime(2101),
+                      );
+
+                      unedate = pickedDate!;
+
+
+                      if(pickedDate != null ){
+                        print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
+                        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                        print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //you can implement different kind of Date Format here according to your requirement
+
+                        setState(() {
+                          dateinput.text = formattedDate; //set output date to TextField value.
+                        });
+                      }else{
+                        print("Date is not selected");
+                      }
+                    },
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: MaterialButton(
+                      onPressed:
+                      creationtaches,
+                      child: Text(Locs.of(context).trans('Accueil')),
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ]
+        ),
+      ),
+    );
+  }
+
+  Widget buildPaysage() {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      // TODO decommenter la ligne suivante
+      drawer: LeTiroir(),
+      // appBar: AppBar(
+      //   // Here we take the value from the MyHomePage object that was created by
+      //   // the App.build method, and use it to set our appbar title.
+      //   title: Text(Locs.of(context).trans('Creation')),
+      // ),
+      body: SingleChildScrollView(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(Locs.of(context).trans('Creation de tache'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
@@ -190,17 +288,17 @@ class _EcranCreationState extends State<EcranCreation> {
               Padding(
                 padding: const EdgeInsets.all(50),
                 child: TextFormField(
-                  decoration: InputDecoration(labelText: Locs.of(context).trans('Nom de la tache'),
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        ),
-                      )),
-                  onChanged: (nom) {
-                    nomtache = nom;
-                  }
+                    decoration: InputDecoration(labelText: Locs.of(context).trans('Nom de la tache'),
+                        labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                              color: Colors.grey
+                          ),
+                        )),
+                    onChanged: (nom) {
+                      nomtache = nom;
+                    }
                 ),
               ),
 
@@ -210,23 +308,23 @@ class _EcranCreationState extends State<EcranCreation> {
 
                   controller: dateinput, //editing controller of this TextField
                   decoration: InputDecoration(
-                      //icon: Icon(Icons.calendar_today), //icon of text field
+                    //icon: Icon(Icons.calendar_today), //icon of text field
                       labelText: Locs.of(context).trans('Entrer une date') ,//label text of field
                       labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      ),
-                    )
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                            color: Colors.grey
+                        ),
+                      )
                   ),
                   readOnly: true,  //set it true, so that user will not able to edit text
                   onTap: () async {
 
                     DateTime? pickedDate = await showDatePicker(
-                        context: context, initialDate: DateTime.now(),
-                        firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
-                        lastDate: DateTime(2101),
+                      context: context, initialDate: DateTime.now(),
+                      firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
+                      lastDate: DateTime(2101),
                     );
 
                     unedate = pickedDate!;
@@ -260,101 +358,7 @@ class _EcranCreationState extends State<EcranCreation> {
                 ),
               ),
             ]
-      ),
-    );
-  }
-
-  Widget buildPaysage() {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // TODO decommenter la ligne suivante
-      drawer: LeTiroir(),
-      // appBar: AppBar(
-      //   // Here we take the value from the MyHomePage object that was created by
-      //   // the App.build method, and use it to set our appbar title.
-      //   title: Text(Locs.of(context).trans('Creation')),
-      // ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(Locs.of(context).trans('Creation de tache'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
-
-            // const Text(
-            //   'Nom',
-            // ),
-            Padding(
-              padding: const EdgeInsets.all(50),
-              child: TextFormField(
-                  decoration: InputDecoration(labelText: Locs.of(context).trans('Nom de la tache'),
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.grey
-                        ),
-                      )),
-                  onChanged: (nom) {
-                    nomtache = nom;
-                  }
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(50),
-              child: TextFormField(
-
-                controller: dateinput, //editing controller of this TextField
-                decoration: InputDecoration(
-                  //icon: Icon(Icons.calendar_today), //icon of text field
-                    labelText: Locs.of(context).trans('Entrer une date') ,//label text of field
-                    labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                          color: Colors.grey
-                      ),
-                    )
-                ),
-                readOnly: true,  //set it true, so that user will not able to edit text
-                onTap: () async {
-
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context, initialDate: DateTime.now(),
-                    firstDate: DateTime(1900), //DateTime.now() - not to allow to choose before today.
-                    lastDate: DateTime(2101),
-                  );
-
-                  unedate = pickedDate!;
-
-
-                  if(pickedDate != null ){
-                    print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    print(formattedDate); //formatted date output using intl package =>  2021-03-16
-                    //you can implement different kind of Date Format here according to your requirement
-
-                    setState(() {
-                      dateinput.text = formattedDate; //set output date to TextField value.
-                    });
-                  }else{
-                    print("Date is not selected");
-                  }
-                },
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Expanded(
-                child: MaterialButton(
-                  onPressed:
-                  creationtaches,
-                  child: Text(Locs.of(context).trans('Accueil')),
-                  color: Colors.blue,
-                ),
-              ),
-            ),
-          ]
+        ),
       ),
     );
   }
