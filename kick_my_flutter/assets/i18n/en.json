@@ -41,6 +41,9 @@
   "Entrer le nouveau pourcentage" : "Enter a new percentage",
   "Enregistrement du nouveau pourcentage" : "Saving the new percentage",
   "Aucune image pour cette tache" : "No image for this task",
+  "Pourcentage doit etre inferieur a 100" : "The percentage must be lass than 100",
+
+  "Inscrivez un nom de tache" : "Enter a task name",
 
   "Accueil" : "Welcome",
   "Aucune image" : "No image",

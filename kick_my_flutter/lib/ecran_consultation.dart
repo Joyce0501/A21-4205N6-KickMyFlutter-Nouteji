@@ -169,6 +169,21 @@ class _EcranConsultationState extends State<EcranConsultation> {
       {
         nouveaupourcentage == taskdetailresponse.percentageDone;
       }
+    else if(nouveaupourcentage > 100){
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // title: const Text('AlertDialog Title'),
+          content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur a 100')),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
 
     else{
       try{

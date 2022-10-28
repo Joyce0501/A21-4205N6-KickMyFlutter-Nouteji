@@ -39,6 +39,9 @@
   "Entrer le nouveau pourcentage" : "Entrer le nouveau pourcentage",
   "Enregistrement du nouveau pourcentage" : "Enregistrement du nouveau pourcentage",
   "Aucune image pour cette tache" : "Aucune image pour cette tache",
+  "Pourcentage doit etre inferieur a 100" : "Pourcentage doit etre inferieur a 100",
+
+  "Inscrivez un nom de tache" : "Inscrivez un nom de tache",
 
   "Accueil" : "Accueil",
   "Aucune image" : "Aucune image",

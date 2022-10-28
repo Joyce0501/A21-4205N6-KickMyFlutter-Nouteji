@@ -39,6 +39,23 @@ class _EcranCreationState extends State<EcranCreation> {
   }
 
   creationtaches() async{
+
+    // if(nomtache == "")
+    //   {
+    //     showDialog<String>(
+    //       context: context,
+    //       builder: (BuildContext context) => AlertDialog(
+    //         // title: const Text('AlertDialog Title'),
+    //         content:  Text(Locs.of(context).trans('Inscrivez un nom de tache')),
+    //         actions: <Widget>[
+    //           TextButton(
+    //             onPressed: () => Navigator.pop(context, 'OK'),
+    //             child: const Text('OK'),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   }
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showLoaderDialog(context);
@@ -60,6 +77,7 @@ class _EcranCreationState extends State<EcranCreation> {
     } on DioError catch(e) {
       print(e);
       String message = e.response!.data;
+      Navigator.of(context).pop();
       if (message == "BadCredentialsException") {
         print('login deja utilise');
       }
