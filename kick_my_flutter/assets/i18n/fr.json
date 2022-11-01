@@ -22,6 +22,10 @@
 
   "Chargement des détails..." : "Chargement des détails...",
 
+  "Selectionnes une image" : "Selectionnes une image",
+
+  "Deconnexion en cours..." :   "Deconnexion en cours..." ,
+
   "Creation de tache" : "Création de tache",
   "Entrer une date" : "Entrer une date",
   "Nom de la tache" : "Nom de la tache",
@@ -39,7 +43,7 @@
   "Entrer le nouveau pourcentage" : "Entrer le nouveau pourcentage",
   "Enregistrement du nouveau pourcentage" : "Enregistrement du nouveau pourcentage",
   "Aucune image pour cette tache" : "Aucune image pour cette tache",
-  "Pourcentage doit etre inferieur a 100" : "Pourcentage doit etre inferieur a 100",
+  "Pourcentage doit etre inferieur ou egal a 100" : "Pourcentage doit etre inferieur ou egal a 100",
 
   "Inscrivez un nom de tache" : "Inscrivez un nom de tache",
 

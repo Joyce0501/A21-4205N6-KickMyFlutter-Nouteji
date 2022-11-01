@@ -127,7 +127,7 @@ class _EcranAccueilState extends State<EcranAccueil> {
                       // TODO : mettre une width par la suite
                   //    backgroundImage:
                       CachedNetworkImage(
-                        imageUrl: 'http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=70",
+                        imageUrl: 'http://10.0.2.2:8080/file/' + this.taches[index].photoId.toString() +"?width=100",
                         placeholder: (context, url) => CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),

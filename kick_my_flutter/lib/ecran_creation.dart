@@ -39,23 +39,6 @@ class _EcranCreationState extends State<EcranCreation> {
   }
 
   creationtaches() async{
-
-    // if(nomtache == "")
-    //   {
-    //     showDialog<String>(
-    //       context: context,
-    //       builder: (BuildContext context) => AlertDialog(
-    //         // title: const Text('AlertDialog Title'),
-    //         content:  Text(Locs.of(context).trans('Inscrivez un nom de tache')),
-    //         actions: <Widget>[
-    //           TextButton(
-    //             onPressed: () => Navigator.pop(context, 'OK'),
-    //             child: const Text('OK'),
-    //           ),
-    //         ],
-    //       ),
-    //     );
-    //   }
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showLoaderDialog(context);
@@ -91,10 +74,6 @@ class _EcranCreationState extends State<EcranCreation> {
             content: Text(Locs.of(context).trans("Le nom de tache entre existe deja")),
             actions: <Widget>[
               TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
                 onPressed: () => Navigator.pop(context, 'OK'),
                 child: const Text('OK'),
               ),
@@ -112,10 +91,6 @@ class _EcranCreationState extends State<EcranCreation> {
             content: Text(Locs.of(context).trans("Le nom de tache entre est trop court")),
             actions: <Widget>[
               TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
                 onPressed: () => Navigator.pop(context, 'OK'),
                 child: const Text('OK'),
               ),
@@ -132,10 +107,6 @@ class _EcranCreationState extends State<EcranCreation> {
             // title: const Text('AlertDialog Title'),
             content:  Text(Locs.of(context).trans("Nom de tache non entre")),
             actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
-              ),
               TextButton(
                 onPressed: () => Navigator.pop(context, 'OK'),
                 child: const Text('OK'),
@@ -155,8 +126,7 @@ class _EcranCreationState extends State<EcranCreation> {
       }
     }
   }
-
-
+  
   @override
   void initState() {
     dateinput.text = ""; //set the initial value of text field
@@ -184,7 +154,6 @@ class _EcranCreationState extends State<EcranCreation> {
       ),
     );
   }
-
 
   @override
   Widget buildPortrait() {

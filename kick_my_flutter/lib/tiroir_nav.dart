@@ -17,17 +17,39 @@ class LeTiroir extends StatefulWidget {
 
 class LeTiroirState extends State<LeTiroir> {
 
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:Text( Locs.of(context).trans ("Deconnexion en cours..." ))),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
+
   deconnexion() async {
     try {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          showLoaderDialog(context);
+        });
       var reponse = await signout();
       print(reponse);
+      Navigator.pop(context);
 
-      Navigator.of(context)
+
+        Navigator.of(context)
           .pushNamedAndRemoveUntil('/ecranconnexion', (Route<dynamic> route) => false);
     }
     on DioError catch(e) {
       print(e);
       String message = e.response!.data;
+      Navigator.of(context).pop();
       if (message == "BadCredentialsException") {
         print('login deja utilise');
       } else {

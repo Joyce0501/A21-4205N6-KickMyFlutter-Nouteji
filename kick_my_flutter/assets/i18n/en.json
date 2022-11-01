@@ -22,6 +22,9 @@
 
   "Chargement des détails..." : "Loading details...",
 
+  "Selectionnes une image" : "Select an image",
+
+  "Deconnexion en cours..." : "A Deconnection occurs...",
 
   "Creation de tache" : "Create a task",
   "Entrer une date" : "Enter a date",
@@ -41,7 +44,7 @@
   "Entrer le nouveau pourcentage" : "Enter a new percentage",
   "Enregistrement du nouveau pourcentage" : "Saving the new percentage",
   "Aucune image pour cette tache" : "No image for this task",
-  "Pourcentage doit etre inferieur a 100" : "The percentage must be lass than 100",
+  "Pourcentage doit etre inferieur ou egal a 100" : "The percentage must be less than or equal to 100",
 
   "Inscrivez un nom de tache" : "Enter a task name",
 

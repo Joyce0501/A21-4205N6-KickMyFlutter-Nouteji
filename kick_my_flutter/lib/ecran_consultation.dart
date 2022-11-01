@@ -36,28 +36,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
   List<XFile>? pickedImages;
 
 
-
-  // void getImage() async {
-  //   ImagePicker picker = ImagePicker();
-  //   pickedImage = await picker.pickImage(source : ImageSource.gallery);
-  //   imagePath = pickedImage!.path;
-  //   setState(() {});
-  // }
-  //
-  // void postImage() async {
-  //   FormData formData = FormData.fromMap({
-  //     "file": await MultipartFile.fromFile(
-  //         pickedImage!.path, filename: pickedImage!.name)
-  //   });
-  //   Dio dio = Dio();
-  //   var response = await dio.post(
-  //       "http://10.0.2.2:8080/file", data: formData);
-  //   String imageID = response.data as String;
-  //   imageNetworkPath = "http://10.0.2.2:8080/file/" + imageID;
-  //   setState(() {});
-  // }
-
-
   final picker = ImagePicker();
 
   // on met le fichier dans l'etat pour l'afficher dans la page
@@ -174,7 +152,7 @@ class _EcranConsultationState extends State<EcranConsultation> {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           // title: const Text('AlertDialog Title'),
-          content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur a 100')),
+          content:  Text(Locs.of(context).trans('Pourcentage doit etre inferieur ou egal a 100')),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'OK'),
@@ -205,7 +183,6 @@ class _EcranConsultationState extends State<EcranConsultation> {
         );
       }
     }
-
   }
 
   @override
@@ -287,56 +264,92 @@ class _EcranConsultationState extends State<EcranConsultation> {
                           }
                       ),
                     ),
-                    // (imageNetworkPath == "")
-                    //     ? Text ("Envoie")
-                    //     : Image.network(imageNetworkPath),
                   ]
               ),
          ),
     ),
+
             Row(
               children: [
                 Expanded(
-                    child:
-                    (taskdetailresponse.photoId == 0 ) ?
-                    Text(Locs.of(context).trans('Aucune image pour cette tache'))
-                        :
-                    CachedNetworkImage(
-                      imageUrl: 'http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString(),
-                      placeholder: (context, url) => CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                   // Image.network('http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString())
+                  child:
+                  //TODO au lieu de mettre directement le widget Image.network, on l'encapsule (on le wrap)
+                  (taskdetailresponse.photoId == 0 ) ?
+                  Text(Locs.of(context).trans('Aucune image pour cette tache'))
+                      :
+                  // dans un LayoutBuilder. Le LayoutBuilder nous permet d'avoir un nouveau build context
+                  // uniquement pour le widget.
+                  LayoutBuilder(
+                      builder: (BuildContext context, BoxConstraints constraints) {
+
+                        //TODO La MediaQuery permet de connaitre la taille disponible dans le build context,
+                        // ici build context est uniquement pour le widget Image.network, c'est donc la taille disponible
+                        // pour l'image
+                        var size = MediaQuery.of(context).size;
+
+                        //TODO la taille est en double, il sera important de convertir la taille en int
+                        // pour que le serveur prenne notre requête (ex: 390 au lieu de 390.0)
+                        String width = size.width.toInt().toString();
+
+                        //TODO Une fois la taille connue, il suffit de la spécifier dans l'URL
+                        return
+                          CachedNetworkImage(
+                            imageUrl: 'http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString() +"?width=" +width, width: size.width,
+                            placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                          );
+                         // Image.network("https://exercices-web.herokuapp.com/exos/image?&width="+width, width: size.width,);
+                      }
+                  ),
                 ),
-                //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
               ],
             ),
+
+
+            // Row(
+            //   children: [
+            //     Expanded(
+            //         child:
+            //         (taskdetailresponse.photoId == 0 ) ?
+            //         Text(Locs.of(context).trans('Aucune image pour cette tache'))
+            //             :
+            //         CachedNetworkImage(
+            //           imageUrl: 'http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString(),
+            //           placeholder: (context, url) => CircularProgressIndicator(),
+            //           errorWidget: (context, url, error) => Icon(Icons.error),
+            //         ),
+            //        // Image.network('http://10.0.2.2:8080/file/' + taskdetailresponse.photoId.toString().toString())
+            //     ),
+            //     //   ElevatedButton(onPressed:sendPicture(this.taskdetailresponse.id,File(imageNetworkPath.path)), child: Text("Envoyer image su serveur")),
+            //   ],
+            // ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: MaterialButton(
-                      child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
-                      color: Colors.blue,
-                      onPressed: () {
-                        changepercentage(widget.le_parametre, nouveaupourcentage);
-                        setState(() {});
-                      },
-                    ),
-                  ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: MaterialButton(
+                          child: Text(Locs.of(context).trans('Enregistrement du nouveau pourcentage')),
+                          color: Colors.blue,
+                          onPressed: () {
+                            changepercentage(widget.le_parametre, nouveaupourcentage);
+                            setState(() {});
+                          },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: MaterialButton(
-                      child: Text("Select an image"),
-                      color: Colors.blue,
-                      onPressed: getImage,
+                      ),
                     ),
-                  ),
-                ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: MaterialButton(
+                          child: Text(Locs.of(context).trans('Selectionnes une image')),
+                          color: Colors.blue,
+                          onPressed: getImage,
+                        ),
+                      ),
+                    ),
               ],
             ),
           ],
