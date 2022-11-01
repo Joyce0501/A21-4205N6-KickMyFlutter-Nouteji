@@ -48,20 +48,37 @@ class LeTiroirState extends State<LeTiroir> {
     }
     on DioError catch(e) {
       print(e);
-      String message = e.response!.data;
       Navigator.of(context).pop();
-      if (message == "BadCredentialsException") {
-        print('login deja utilise');
-      } else {
-        print('autre erreurs');
-
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('Erreur authentification')
-            )
+      if(e.response == null)
+      {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content:  Text(Locs.of(context).trans("Erreur réseau")),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
         );
       }
-
+      else{
+        String message = e.response!.data;
+        Navigator.of(context).pop();
+        if (message == "BadCredentialsException") {
+          print('login deja utilise');
+        } else {
+          print('autre erreurs');
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: Text('Erreur authentification')
+              )
+          );
+        }
+      }
     }
   }
 

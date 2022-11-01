@@ -53,11 +53,26 @@ class _EcranAccueilState extends State<EcranAccueil> {
         Navigator.pop(context);
       setState(() {});
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Erreur reseau')
-          )
-      );
+      print(e);
+      Navigator.of(context).pop();
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            // title: const Text('AlertDialog Title'),
+            content:  Text(Locs.of(context).trans("Erreur réseau")),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //         content: Text('Erreur reseau')
+      //     )
+      // );
     }
   }
 

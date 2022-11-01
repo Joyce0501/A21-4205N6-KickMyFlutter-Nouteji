@@ -79,6 +79,19 @@ class _EcranConsultationState extends State<EcranConsultation> {
               (err) {
             // TODO afficher un message a l'utilisateur pas marche
             print(err);
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                // title: const Text('AlertDialog Title'),
+                content:  Text(Locs.of(context).trans("Erreur réseau")),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
           }
       );
     }
@@ -133,10 +146,19 @@ class _EcranConsultationState extends State<EcranConsultation> {
       setState(() {});
     } catch (e) {
       print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Erreur reseau')
-          )
+      Navigator.of(context).pop();
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // title: const Text('AlertDialog Title'),
+          content:  Text(Locs.of(context).trans("Erreur réseau")),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
       );
     }
   }
@@ -176,11 +198,20 @@ class _EcranConsultationState extends State<EcranConsultation> {
 
       } catch (e) {
         print(e);
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('Erreur reseau')
-            )
-        );
+        Navigator.of(context).pop();
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content:  Text(Locs.of(context).trans("Erreur réseau")),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
       }
     }
   }

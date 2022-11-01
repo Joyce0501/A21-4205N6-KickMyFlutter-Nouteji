@@ -59,19 +59,14 @@ class _EcranCreationState extends State<EcranCreation> {
 
     } on DioError catch(e) {
       print(e);
-      String message = e.response!.data;
       Navigator.of(context).pop();
-      if (message == "BadCredentialsException") {
-        print('login deja utilise');
-      }
-
-      else if(message == "Existing")
+      if(e.response == null)
       {
         showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
             // title: const Text('AlertDialog Title'),
-            content: Text(Locs.of(context).trans("Le nom de tache entre existe deja")),
+            content:  Text(Locs.of(context).trans("Erreur réseau")),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'OK'),
@@ -81,49 +76,73 @@ class _EcranCreationState extends State<EcranCreation> {
           ),
         );
       }
+      else{
+        String message = e.response!.data;
+        if (message == "BadCredentialsException") {
+          print('login deja utilise');
+        }
 
-      else if(message == "TooShort")
-      {
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            // title: const Text('AlertDialog Title'),
-            content: Text(Locs.of(context).trans("Le nom de tache entre est trop court")),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
+        else if(message == "Existing")
+        {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content: Text(Locs.of(context).trans("Le nom de tache entre existe deja")),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+
+        else if(message == "TooShort")
+        {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content: Text(Locs.of(context).trans("Le nom de tache entre est trop court")),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+
+        else if(message == "Empty")
+        {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content:  Text(Locs.of(context).trans("Nom de tache non entre")),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+        else {
+          print('autre erreurs');
+
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: Text('Erreur ')
+              )
+          );
+        }
       }
 
-      else if(message == "Empty")
-      {
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            // title: const Text('AlertDialog Title'),
-            content:  Text(Locs.of(context).trans("Nom de tache non entre")),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-      else {
-        print('autre erreurs');
-
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('Erreur ')
-            )
-        );
-      }
     }
   }
   

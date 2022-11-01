@@ -60,18 +60,14 @@ class _EcranInscriptionState extends State<EcranInscription> {
 
       } on DioError catch(e) {
         print(e);
-        String message = e.response!.data;
         Navigator.of(context).pop();
-        if (message == "BadCredentialsException") {
-          print('login deja utilise');
-        }
-        else if(message == "UsernameTooShort")
+        if(e.response == null)
         {
           showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
               // title: const Text('AlertDialog Title'),
-              content:  Text(Locs.of(context).trans('Nom utilisateur trop court')),
+              content:  Text(Locs.of(context).trans("Erreur réseau")),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'OK'),
@@ -81,69 +77,85 @@ class _EcranInscriptionState extends State<EcranInscription> {
             ),
           );
         }
-        else if(message == "UsernameAlreadyTaken")
-        {
-          showDialog<String>(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-              // title: const Text('AlertDialog Title'),
-              content:  Text(Locs.of(context).trans('Nom utilisateur deja pris')),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.pop(context, 'OK'),
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
-        }
-        else if(message == "PasswordTooShort")
-        {
-          showDialog<String>(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-              // title: const Text('AlertDialog Title'),
-              content:  Text(Locs.of(context).trans('Mot de passe trop court')),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.pop(context, 'OK'),
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
-        }
-        else {
-          print('autre erreurs');
+        else{
+          String message = e.response!.data;
+          if (message == "BadCredentialsException") {
+            print('login deja utilise');
+          }
+          else if(message == "UsernameTooShort")
+          {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                // title: const Text('AlertDialog Title'),
+                content:  Text(Locs.of(context).trans('Nom utilisateur trop court')),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          }
+          else if(message == "UsernameAlreadyTaken")
+          {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                // title: const Text('AlertDialog Title'),
+                content:  Text(Locs.of(context).trans('Nom utilisateur deja pris')),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          }
+          else if(message == "PasswordTooShort")
+          {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                // title: const Text('AlertDialog Title'),
+                content:  Text(Locs.of(context).trans('Mot de passe trop court')),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          }
+          else {
+            print('autre erreurs');
 
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content: Text('Erreur authentification')
-              )
-          );
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text('Erreur authentification')
+                )
+            );
+          }
         }
       }
     }
      else{
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //      SnackBar(
-    //          content: Text('Les mots de passe ne sont pas identiques')
-    //     )
-    // );
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            // title: const Text('AlertDialog Title'),
-            content:  Text(Locs.of(context).trans('Les mots de passe ne sont pas identiques')),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-   } // fin de mon else
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          content:  Text(Locs.of(context).trans('Les mots de passe ne sont pas identiques')),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override

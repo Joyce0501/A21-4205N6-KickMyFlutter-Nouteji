@@ -21,6 +21,7 @@ class _EcranConnexionState extends State<EcranConnexion> {
   bool dialogVisible = false;
 
   showLoaderDialog(BuildContext context){
+     Widget okbutton = TextButton(onPressed: (){Navigator.of(context).pop;}, child: Text("bye"));
     AlertDialog alert=AlertDialog(
       content: new Row(
         children: [
@@ -37,68 +38,106 @@ class _EcranConnexionState extends State<EcranConnexion> {
   }
 
   connexion() async {
-    try {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showLoaderDialog(context);
-      });
-      SigninRequest req = SigninRequest();
-      req.username = nomConnexion;
-      req.password = passwordConnexion;
-      var reponse = await signin(req);
-      print(reponse);
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EcranAccueil(),
+    if(nomConnexion == "" || passwordConnexion == ""){
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          // title: const Text('AlertDialog Title'),
+          content:  Text(Locs.of(context).trans("Veuillez saisir des informations")),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
         ),
       );
+    }
+    else{
+      try {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          showLoaderDialog(context);
+        });
+        SigninRequest req = SigninRequest();
+        req.username = nomConnexion;
+        req.password = passwordConnexion;
+        var reponse = await signin(req);
+        print(reponse);
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EcranAccueil(),
+          ),
+        );
 
-    } on DioError catch(e) {
-      print(e);
-      String message = e.response!.data;
-      Navigator.of(context).pop();
-      if (message == "BadCredentialsException") {
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            // title: const Text('AlertDialog Title'),
-            content:  Text(Locs.of(context).trans("Compte introuvable")),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
+      } on DioError catch(e) {
+        print(e);
+        Navigator.of(context).pop();
+        if(e.response == null)
+        {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              // title: const Text('AlertDialog Title'),
+              content:  Text(Locs.of(context).trans("Erreur réseau")),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+        else{
+          String message = e.response!.data;
+          if (message == "BadCredentialsException") {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                // title: const Text('AlertDialog Title'),
+                content:  Text(Locs.of(context).trans("Compte introuvable")),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
-      }
-      else if(message == "InternalAuthenticationServiceException")
-      {
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            // title: const Text('AlertDialog Title'),
-            content:  Text(Locs.of(context).trans("Compte introuvable")),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
+            );
+          }
+          else if(message == "InternalAuthenticationServiceException")
+          {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                // title: const Text('AlertDialog Title'),
+                content:  Text(Locs.of(context).trans("Compte introuvable")),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
-      }
-      else {
-        print('autre erreurs');
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('Erreur authentification')
-            )
-        );
+            );
+          }
+          else {
+            print('autre erreurs');
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text('Erreur authentification')
+                )
+            );
+          }
+
+        }
+
       }
 
     }
+
   }
 
   @override
