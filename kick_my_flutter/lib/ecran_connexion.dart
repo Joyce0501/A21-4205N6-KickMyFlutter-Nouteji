@@ -21,7 +21,6 @@ class _EcranConnexionState extends State<EcranConnexion> {
   bool dialogVisible = false;
 
   showLoaderDialog(BuildContext context){
-     Widget okbutton = TextButton(onPressed: (){Navigator.of(context).pop;}, child: Text("bye"));
     AlertDialog alert=AlertDialog(
       content: new Row(
         children: [
